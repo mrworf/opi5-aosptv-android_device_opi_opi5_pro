@@ -54,6 +54,7 @@ vendor.ffmpeg.rga_debug=true
 
 # Graphics
 vendor.hwc.drm.ctm=DRM_OR_GPU
+vendor.hwc.drm.force_mode=1920x1080@60
 # Rockchip VOP planes reject source or destination rectangles below 4x4.
 # Keep tiny transition/decor layers in client composition.
 vendor.hwc.drm.min_plane_size=4
