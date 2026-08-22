@@ -213,6 +213,20 @@ std::unique_ptr<Configuration> getPrimaryConfiguration() {
                 createDynamicPortConfig(speakerOutDevice.id, speakerOutDevice.id, 0, false,
                                         createDeviceExt(AudioDeviceType::OUT_SPEAKER, 0)));
 
+        AudioPort hdmiOutDevice =
+                createPort(c.nextPortId++, "HDMI", 0, false,
+                           createDeviceExt(AudioDeviceType::OUT_DEVICE, 0,
+                                           AudioDeviceDescription::CONNECTION_HDMI));
+        c.ports.push_back(hdmiOutDevice);
+        c.connectedProfiles[hdmiOutDevice.id] = standardPcmAudioProfiles;
+
+        AudioPort analogOutDevice =
+                createPort(c.nextPortId++, "Analog Jack", 0, false,
+                           createDeviceExt(AudioDeviceType::OUT_HEADPHONE, 0,
+                                           AudioDeviceDescription::CONNECTION_ANALOG));
+        c.ports.push_back(analogOutDevice);
+        c.connectedProfiles[analogOutDevice.id] = standardPcmAudioProfiles;
+
         AudioPort micInDevice =
                 createPort(c.nextPortId++, "Built-In Mic", 0, true,
                            createDeviceExt(AudioDeviceType::IN_MICROPHONE,
@@ -285,6 +299,8 @@ std::unique_ptr<Configuration> getPrimaryConfiguration() {
         c.ports.push_back(fmTunerInMix);
 
         c.routes.push_back(createRoute({primaryOutMix}, speakerOutDevice));
+        c.routes.push_back(createRoute({primaryOutMix}, hdmiOutDevice));
+        c.routes.push_back(createRoute({primaryOutMix}, analogOutDevice));
         c.routes.push_back(createRoute({micInDevice}, primaryInMix));
         c.routes.push_back(createRoute({telephonyRxInDevice}, telephonyRxInMix));
         c.routes.push_back(createRoute({telephonyTxOutMix}, telephonyTxOutDevice));

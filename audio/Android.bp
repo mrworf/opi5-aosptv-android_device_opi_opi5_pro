@@ -149,6 +149,14 @@ cc_binary {
     installable: false,
 }
 
+cc_binary {
+    name: "opi_audio_policy_validator",
+    defaults: ["aidlaudioservice_opi_defaults"],
+    static_libs: ["libaudioserviceimpl-opi"],
+    srcs: ["audio_policy_config_validator.cpp"],
+    installable: false,
+}
+
 cc_defaults {
     name: "aidlaudioeffectservice_opi_defaults",
     vendor: true,

@@ -18,6 +18,7 @@
 #pragma once
 
 #include <mutex>
+#include <string>
 #include <vector>
 
 #include <android-base/thread_annotations.h>
@@ -64,7 +65,7 @@ class StreamPrimary : public StreamAlsa {
     static constexpr StreamPrimary::AlsaDeviceId kStubDeviceId{
             primary::PrimaryMixer::kInvalidAlsaCard, primary::PrimaryMixer::kInvalidAlsaDevice};
 
-    static AlsaDeviceId getCardId();
+    static AlsaDeviceId getCardId(const std::string& requestedDevice = "");
     static AlsaDeviceId getCardAndDeviceId(
             const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices);
     static bool useStubStream(bool isInput,

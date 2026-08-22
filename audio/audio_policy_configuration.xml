@@ -46,6 +46,16 @@
                              samplingRates="48000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </devicePort>
+                <devicePort tagName="HDMI" type="AUDIO_DEVICE_OUT_HDMI" role="sink">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+                <devicePort tagName="Analog Jack" type="AUDIO_DEVICE_OUT_WIRED_HEADPHONE" role="sink">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
                 <devicePort tagName="Built-In Mic" type="AUDIO_DEVICE_IN_BUILTIN_MIC" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000 11025 16000 32000 44100 48000"
@@ -54,6 +64,10 @@
             </devicePorts>
             <routes>
                 <route type="mix" sink="Speaker"
+                       sources="primary output"/>
+                <route type="mix" sink="HDMI"
+                       sources="primary output"/>
+                <route type="mix" sink="Analog Jack"
                        sources="primary output"/>
                 <route type="mix" sink="primary input"
                        sources="Built-In Mic"/>

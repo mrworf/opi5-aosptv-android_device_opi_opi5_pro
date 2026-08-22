@@ -167,7 +167,18 @@ ndk::ScopedAStatus StreamPrimary::setConnectedDevices(const ConnectedDevices& de
     {
         const bool useStubDriver = devices.empty() || useStubStream(mIsInput, devices[0]);
         std::lock_guard l(mLock);
-        mAlsaDeviceId = useStubDriver ? kStubDeviceId : getCardId();
+        if (useStubDriver) {
+            mAlsaDeviceId = kStubDeviceId;
+        } else if (!mIsInput &&
+                   devices[0].type.type == AudioDeviceType::OUT_HEADPHONE &&
+                   devices[0].type.connection == AudioDeviceDescription::CONNECTION_ANALOG) {
+            mAlsaDeviceId = getCardId("jack");
+        } else if (!mIsInput &&
+                   devices[0].type.connection == AudioDeviceDescription::CONNECTION_HDMI) {
+            mAlsaDeviceId = getCardId("hdmi0");
+        } else {
+            mAlsaDeviceId = getCardId();
+        }
     }
     if (!devices.empty()) {
         auto streamDataProcessor = getContext().getStreamDataProcessor().lock();
@@ -191,7 +202,7 @@ bool StreamPrimary::isStubStream() {
 }
 
 // static
-StreamPrimary::AlsaDeviceId StreamPrimary::getCardId() {
+StreamPrimary::AlsaDeviceId StreamPrimary::getCardId(const std::string& requestedDevice) {
     AlsaDeviceId cardAndDeviceId;
     cardAndDeviceId.second = 0;
 
@@ -203,14 +214,16 @@ StreamPrimary::AlsaDeviceId StreamPrimary::getCardId() {
         return cardAndDeviceId;
     }
 
-    const std::string deviceName = GetProperty("persist.vendor.audio.device", "hdmi0");
+    const std::string deviceName = requestedDevice.empty()
+            ? GetProperty("persist.vendor.audio.device", "hdmi0")
+            : requestedDevice;
     std::string cardPath;
     for (int i = 0; i < 8; i++) {
         cardPath = "/proc/asound/card" + std::to_string(i) + "/id";
         std::string cardName;
         if (ReadFileToString(cardPath, &cardName)) {
             if (deviceName == "jack" && (cardName.starts_with("Headphones")
-                    || cardName.starts_with("es8388"))) {
+                    || cardName.find("es8388") != std::string::npos)) {
                 LOG(INFO) << "Using PCM card " << i << " for 3.5mm audio jack";
                 cardAndDeviceId.first = i;
                 return cardAndDeviceId;
