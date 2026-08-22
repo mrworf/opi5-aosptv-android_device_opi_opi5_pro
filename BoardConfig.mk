@@ -34,6 +34,12 @@ BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=ttyS2,1500000 no_console_suspend root=/dev/ram0 rootwait androidboot.hardware=opi5
 
+# Package every module enabled by the Orange Pi kernel configuration.  Keep the eager-load
+# list empty: ueventd uses modules.alias/modules.dep to load the right module on demand.
+OPI5_KERNEL_BUILD_OUT := $(abspath $(DEVICE_PATH)/../../../../kernel-build-out)
+BOARD_VENDOR_KERNEL_MODULES := $(shell find $(OPI5_KERNEL_BUILD_OUT) -type f -name '*.ko' 2>/dev/null | sort)
+BOARD_VENDOR_KERNEL_MODULES_LOAD := false
+
 # Manifest
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/framework_compatibility_matrix.xml
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml

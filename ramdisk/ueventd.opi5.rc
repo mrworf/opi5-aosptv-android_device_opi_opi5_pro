@@ -1,3 +1,8 @@
+# Load packaged kernel modules in response to hardware modalias uevents.  The kernel has
+# broad USB support configured as modules, so this is required for keyboards, remotes,
+# network adapters, storage readers, and other hot-plug devices to bind automatically.
+modalias_handling enabled
+
 # Bluetooth
 /dev/rfkill                                                                  0660   bluetooth  bluetooth
 
@@ -15,4 +20,4 @@
 /dev/video*                                                                  0660   media      media
 
 # USB
-/sys/class/udc/1000480000.usb  current_speed                                 0664   system     system
+/sys/class/udc/fc000000.usb    current_speed                                 0664   system     system

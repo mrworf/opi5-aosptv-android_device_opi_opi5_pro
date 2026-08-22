@@ -8,11 +8,23 @@
 # Inherit device configuration
 $(call inherit-product, device/opi/opi5_pro/device.mk)
 
+# Pre-authorize the build workstation without disabling ADB authentication.
+PRODUCT_ADB_KEYS := device/opi/opi5_pro/adb_keys
+
 PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_CHARACTERISTICS := tv
 
+# Preserve logcat under /data/misc/logd so a failed headless boot can be
+# diagnosed by attaching the NVMe to the build workstation.
+PRODUCT_PRODUCT_PROPERTIES += \
+    logd.logpersistd=logcatd
+
 $(call inherit-product, device/google/atv/products/atv_base.mk)
 $(call enforce-product-packages-exist,com.android.ranging vendor_tracing_descriptors)
+
+# Google TV services and Play Store, without replacing the AOSP TV launcher.
+GMS_VARIANT := minimal
+$(call inherit-product, vendor/gapps_tv/arm64/arm64-vendor.mk)
 
 # Android TV
 PRODUCT_PACKAGES += \
@@ -41,5 +53,5 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEVICE := opi5_pro
 PRODUCT_NAME := aosp_opi
 PRODUCT_BRAND := Orangepi
-PRODUCT_MODEL := 5_pro
+PRODUCT_MODEL := Orange Pi 5
 PRODUCT_MANUFACTURER := Orangepi

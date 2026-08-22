@@ -138,6 +138,7 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/ramdisk/fstab.opi5:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.opi5 \
     $(DEVICE_PATH)/ramdisk/init.opi5.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.opi5.rc \
     $(DEVICE_PATH)/ramdisk/init.opi5.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.opi5.usb.rc \
+    $(DEVICE_PATH)/ramdisk/opi-dmesg-capture.sh:$(TARGET_COPY_OUT_VENDOR)/bin/opi-dmesg-capture.sh \
     $(DEVICE_PATH)/ramdisk/ueventd.opi5.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
 # Reboot recovery script
@@ -172,15 +173,16 @@ PRODUCT_COPY_FILES += \
 # USB
 PRODUCT_PACKAGES += \
     com.android.hardware.usb \
-    com.android.hardware.usb.gadget.opi5
+    com.android.hardware.usb.gadget.opi5 \
+    linux_firmware_r8152
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
 
-# Virtualization
-$(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+# Android Virtualization Framework is intentionally not enabled.  This RK3588
+# kernel does not provide the pKVM support required by AVF.
 
 # Wifi
 PRODUCT_PACKAGES += \

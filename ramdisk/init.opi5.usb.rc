@@ -1,4 +1,13 @@
 on boot
+    # Android init performs only a one-shot UDC scan during normal boot.  The
+    # RK3588 DWC3 controller may finish probing after that scan, so identify it
+    # explicitly here, after device coldplug/deferred probing has run.
+    setprop sys.usb.controller fc000000.usb
+
+    # Keep an authenticated network ADB path available for USB Ethernet while
+    # the physical USB gadget path is being brought up.
+    setprop service.adb.tcp.port 5555
+
     mount configfs none /config
     mkdir /config/usb_gadget/g1 0770
     mkdir /config/usb_gadget/g1/strings/0x409 0770
@@ -7,7 +16,7 @@ on boot
     write /config/usb_gadget/g1/idVendor 0x18d1
     write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
     write /config/usb_gadget/g1/strings/0x409/manufacturer "Orange pi"
-    write /config/usb_gadget/g1/strings/0x409/product "5 Pro"
+    write /config/usb_gadget/g1/strings/0x409/product "Orange Pi 5"
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     mkdir /config/usb_gadget/g1/functions/ffs.mtp
     mkdir /config/usb_gadget/g1/functions/ffs.ptp
@@ -86,4 +95,18 @@ on property:sys.usb.controller=*
     mount functionfs adb /dev/usb-ffs/adb rmode=0770,fmode=0660,uid=2000,gid=2000,no_disconnect=1
     mount functionfs mtp /dev/usb-ffs/mtp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
     mount functionfs ptp /dev/usb-ffs/ptp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
+    # The AIDL gadget HAL owns configfs function linking and UDC binding.  Value 2
+    # intentionally keeps the legacy init.usb.configfs.rc actions (0/1) idle;
+    # otherwise they bind the gadget first and the HAL's function symlink fails.
     setprop sys.usb.configfs 2
+
+on post-fs-data
+    mkdir /data/misc/dmesgd 0700 root root
+    start opi-dmesg-capture
+
+service opi-dmesg-capture /vendor/bin/sh /vendor/bin/opi-dmesg-capture.sh
+    class core
+    user root
+    group root log
+    seclabel u:r:init:s0
+    disabled

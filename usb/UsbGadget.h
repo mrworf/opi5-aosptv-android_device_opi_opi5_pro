@@ -57,11 +57,10 @@ using ::ndk::ScopedAStatus;
 using ::std::shared_ptr;
 using ::std::string;
 
-//constexpr char kGadgetName[] = "1000480000.usb";
-constexpr char kGadgetName[] = "1000480000.usb";
+constexpr char kGadgetName[] = "fc000000.usb";
 static MonitorFfs monitorFfs(kGadgetName);
 
-#define UDC_PATH "/sys/class/udc/1000480000.usb/"
+#define UDC_PATH "/sys/class/udc/fc000000.usb/"
 #define SPEED_PATH UDC_PATH "current_speed"
 
 struct UsbGadget : public BnUsbGadget {
