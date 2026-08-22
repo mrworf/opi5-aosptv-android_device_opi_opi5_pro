@@ -57,6 +57,8 @@ vendor.hwc.drm.ctm=DRM_OR_GPU
 # Rockchip VOP planes reject source or destination rectangles below 4x4.
 # Keep tiny transition/decor layers in client composition.
 vendor.hwc.drm.min_plane_size=4
+# Prefer a responsive boot mode while leaving every EDID mode selectable.
+vendor.hwc.drm.preferred_mode=1920x1080@60
 
 # Lockscreen
 ro.lockscreen.disable.default=true

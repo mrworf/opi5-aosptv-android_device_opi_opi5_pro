@@ -22,3 +22,4 @@ vendor.hwc.drm.ctm          u:object_r:vendor_hwc_config_prop:s0
 vendor.hwc.drm.disable_hdr  u:object_r:vendor_hwc_config_prop:s0
 vendor.hwc.drm.force_mode   u:object_r:vendor_hwc_config_prop:s0
 vendor.hwc.drm.min_plane_size u:object_r:vendor_hwc_config_prop:s0
+vendor.hwc.drm.preferred_mode u:object_r:vendor_hwc_config_prop:s0
