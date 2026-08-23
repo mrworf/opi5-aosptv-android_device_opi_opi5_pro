@@ -169,6 +169,11 @@ ndk::ScopedAStatus StreamPrimary::setConnectedDevices(const ConnectedDevices& de
         std::lock_guard l(mLock);
         if (useStubDriver) {
             mAlsaDeviceId = kStubDeviceId;
+        } else if (mIsInput &&
+                   devices[0].type.type == AudioDeviceType::IN_MICROPHONE) {
+            // The Orange Pi 5 built-in/analog capture endpoint is provided by
+            // the ES8388 codec, not by the default HDMI PCM card.
+            mAlsaDeviceId = getCardId("jack");
         } else if (!mIsInput &&
                    devices[0].type.type == AudioDeviceType::OUT_HEADPHONE &&
                    devices[0].type.connection == AudioDeviceDescription::CONNECTION_ANALOG) {

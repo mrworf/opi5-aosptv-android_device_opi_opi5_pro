@@ -1,6 +1,6 @@
 # Audio
 persist.vendor.audio.device=hdmi0
-ro.boot.audio.tinyalsa.simulate_input=true
+ro.boot.audio.tinyalsa.simulate_input=false
 ro.config.media_vol_default=20
 ro.config.media_vol_steps=25
 
