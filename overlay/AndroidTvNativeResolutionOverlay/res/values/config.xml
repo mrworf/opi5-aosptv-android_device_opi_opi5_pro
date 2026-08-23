@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Render at the selected physical mode instead of scaling a 720p TV UI. -->
+    <integer name="config_maxUiWidth">0</integer>
+</resources>
