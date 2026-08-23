@@ -1,1 +1,5 @@
 gpu_access(hal_graphics_allocator_default)
+
+# YUV video surfaces use the low-address CMA heap so the 32-bit RGA2 engine
+# can import them without SWIOTLB bouncing.
+allow hal_graphics_allocator_default dmabuf_heap_device:chr_file rw_file_perms;
