@@ -31,6 +31,9 @@ using aidl::android::hardware::audio::common::hasMmapFlag;
 using aidl::android::hardware::audio::common::SinkMetadata;
 using aidl::android::hardware::audio::common::SourceMetadata;
 using aidl::android::hardware::audio::core::StreamDescriptor;
+using aidl::android::media::audio::common::AudioDeviceAddress;
+using aidl::android::media::audio::common::AudioDeviceDescription;
+using aidl::android::media::audio::common::AudioDeviceType;
 using aidl::android::media::audio::common::AudioInputFlags;
 using aidl::android::media::audio::common::AudioIoFlags;
 using aidl::android::media::audio::common::AudioOffloadInfo;
@@ -94,6 +97,26 @@ ndk::ScopedAStatus ModulePrimary::createOutputStream(
     }
     return createStreamInstance<StreamOutPrimary>(result, std::move(context), sourceMetadata,
                                                   offloadInfo);
+}
+
+ndk::ScopedAStatus ModulePrimary::populateConnectedDevicePort(AudioPort* audioPort,
+                                                              int32_t nextPortId) {
+    if (audioPort->ext.getTag() != AudioPortExt::Tag::device) {
+        return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
+    }
+
+    auto& device = audioPort->ext.get<AudioPortExt::Tag::device>().device;
+    if (device.type.type == AudioDeviceType::OUT_HEADPHONE &&
+        device.type.connection == AudioDeviceDescription::CONNECTION_ANALOG) {
+        device.address = AudioDeviceAddress::make<AudioDeviceAddress::Tag::id>("CARD_1_DEV_0");
+        return ndk::ScopedAStatus::ok();
+    }
+    if (device.type.connection == AudioDeviceDescription::CONNECTION_HDMI) {
+        device.address = AudioDeviceAddress::make<AudioDeviceAddress::Tag::id>("CARD_0_DEV_0");
+        return ndk::ScopedAStatus::ok();
+    }
+
+    return Module::populateConnectedDevicePort(audioPort, nextPortId);
 }
 
 ndk::ScopedAStatus ModulePrimary::createMmapBuffer(const AudioPortConfig& portConfig,
