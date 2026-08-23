@@ -6,6 +6,7 @@
 
 DEVICE_PATH := device/opi/opi5_pro
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
+PRODUCT_SOONG_NAMESPACES += vendor/opi/youtube_tv
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, frameworks/native/build/tablet-7in-xhdpi-2048-dalvik-heap.mk)
@@ -23,6 +24,7 @@ PRODUCT_PACKAGES += \
     com.android.hardware.audio.opi5
 
 PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.microphone.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.microphone.xml \
     $(DEVICE_PATH)/audio/audio_effects_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects_config.xml \
     $(DEVICE_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(DEVICE_PATH)/audio/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
@@ -199,7 +201,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
 PRODUCT_PACKAGES += \
-    Jelly
+    Jelly \
+    YouTubeTV
 
 # Window extensions
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)

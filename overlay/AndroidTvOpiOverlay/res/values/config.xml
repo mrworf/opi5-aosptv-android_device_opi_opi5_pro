@@ -34,6 +34,13 @@
          Do not set this to true for production devices. Doing so will cause you to fail CTS. -->
     <bool name="config_disableUsbPermissionDialogs">true</bool>
 
+    <!-- The Orange Pi exposes the ES8388 jack as a Linux input switch. -->
+    <bool name="config_useDevInputEventForAudioJack">true</bool>
+
+    <!-- HDMI is the board's fixed primary display/audio connection, but the
+         mainline DRM driver does not create Android's legacy hdmi_audio switch. -->
+    <bool name="config_assumeHdmiAudioConnected">true</bool>
+
     <!-- Control the behavior when the user long presses the power button.
             0 - Nothing
             1 - Global actions menu
