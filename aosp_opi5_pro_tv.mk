@@ -19,6 +19,8 @@ PRODUCT_CHARACTERISTICS := tv
 PRODUCT_PRODUCT_PROPERTIES += \
     logd.logpersistd=logcatd
 
+# This TV has no Car watchdog service or resource-overuse configuration.
+PRODUCT_ENABLE_TV_IOWATCHDOG := false
 $(call inherit-product, device/google/atv/products/atv_base.mk)
 $(call enforce-product-packages-exist,com.android.ranging vendor_tracing_descriptors)
 
