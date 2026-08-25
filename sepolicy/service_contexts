@@ -7,4 +7,4 @@ android.hardware.security.sharedsecret.ISharedSecret/gatekeeper  u:object_r:hal_
 # Graphics
 mapper/minigbm_gbm_mesa  u:object_r:hal_graphics_mapper_service:s0
 mapper/minigbm  u:object_r:hal_graphics_mapper_service:s0
-
+mapper/minigbm_rockchip  u:object_r:hal_graphics_mapper_service:s0
