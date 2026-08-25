@@ -1,0 +1,12 @@
+// Copyright (C) 2026
+// SPDX-License-Identifier: Apache-2.0
+
+java_binary {
+    name: "WidevineL3Probe",
+    srcs: ["src/**/*.java"],
+    main_class: "org.orangepi.widevineprobe.Main",
+    sdk_version: "system_current",
+    dex_preopt: {
+        enabled: false,
+    },
+}
