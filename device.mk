@@ -52,6 +52,18 @@ PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
 PRODUCT_PACKAGES += \
     com.android.hardware.drm.clearkey
 
+# Widevine is proprietary and is never part of this source repository. The
+# explicit build flag keeps ordinary AOSP builds reproducible while making a
+# requested Widevine build fail instead of silently shipping ClearKey alone.
+ifeq ($(OPI5_INCLUDE_WIDEVINE_L3),1)
+OPI5_WIDEVINE_LOCAL_MK := vendor/opi/widevine_local/widevine-vendor.mk
+ifeq ($(wildcard $(OPI5_WIDEVINE_LOCAL_MK)),)
+$(error OPI5_INCLUDE_WIDEVINE_L3=1 but $(OPI5_WIDEVINE_LOCAL_MK) is missing)
+endif
+PRODUCT_SOONG_NAMESPACES += vendor/opi/widevine_local
+$(call inherit-product, $(OPI5_WIDEVINE_LOCAL_MK))
+endif
+
 # Emergency info
 PRODUCT_PACKAGES += \
     EmergencyInfo

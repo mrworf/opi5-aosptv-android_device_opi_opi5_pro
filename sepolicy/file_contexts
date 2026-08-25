@@ -4,6 +4,8 @@
 
 # DRM
 /data/vendor/mediadrm(/.*)?  u:object_r:mediadrm_vendor_data_file:s0
+/vendor/bin/hw/android\.hardware\.drm-service\.widevine(-lazy)?                u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@[0-9]+\.[0-9]+-service\.widevine(-lazy)? u:object_r:hal_drm_widevine_exec:s0
 
 
 
