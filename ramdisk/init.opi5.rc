@@ -7,6 +7,12 @@ on init
 on fs
     mount_all /vendor/etc/fstab.opi5 --early
 
+on post-fs
+    # Socket diagnostic families have no hardware modalias event, so load the
+    # handlers netd needs after /vendor becomes available.
+    insmod /vendor/lib/modules/inet_diag.ko
+    insmod /vendor/lib/modules/tcp_diag.ko
+
 on late-fs
     mount_all /vendor/etc/fstab.opi5 --late
     
@@ -22,4 +28,3 @@ on boot
     chmod 0666 /sys/devices/system/cpu/cpufreq/boost
 
     
-
