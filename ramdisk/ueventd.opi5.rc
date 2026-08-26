@@ -14,6 +14,7 @@ modalias_handling enabled
 # DMA
 /dev/dma_heap/default_cma_region                                             0660   system     graphics
 /dev/dma_heap/system                                                         0666   system     graphics
+/dev/dma_heap/system-uncached                                                0666   system     graphics
 
 # FFmpeg
 /dev/rga                                                                     0660   media      media
