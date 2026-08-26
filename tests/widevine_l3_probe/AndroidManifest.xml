@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.orangepi.widevineprobe">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:label="Widevine L3 Probe" />
+
+    <instrumentation
+        android:name="androidx.test.runner.AndroidJUnitRunner"
+        android:targetPackage="org.orangepi.widevineprobe"
+        android:label="Orange Pi Widevine L3 acceptance probe" />
+</manifest>

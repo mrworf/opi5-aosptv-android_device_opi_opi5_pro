@@ -10,3 +10,19 @@ java_binary {
         enabled: false,
     },
 }
+
+android_test {
+    name: "WidevineL3ProbeTests",
+    srcs: [
+        "src/**/*.java",
+        "testsrc/**/*.java",
+    ],
+    manifest: "AndroidManifest.xml",
+    sdk_version: "system_current",
+    libs: ["android.test.runner.stubs.system"],
+    static_libs: [
+        "androidx.test.ext.junit",
+        "androidx.test.rules",
+    ],
+    test_suites: ["general-tests"],
+}

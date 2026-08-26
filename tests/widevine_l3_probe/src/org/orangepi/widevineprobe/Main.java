@@ -16,7 +16,6 @@ import android.util.JsonWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -40,7 +39,7 @@ public final class Main {
         System.exit(probeResult.exitCode);
     }
 
-    private static ProbeResult run(String[] args) {
+    static ProbeResult run(String[] args) {
         boolean provision = args.length == 1 && "--provision".equals(args[0]);
         if (args.length > 1 || (args.length == 1 && !provision)) {
             return failure("invalid_arguments", "IllegalArgumentException", 2);
@@ -124,27 +123,21 @@ public final class Main {
     private static void provision(MediaDrm drm, Map<String, Object> result)
             throws IOException, DeniedByServerException {
         MediaDrm.ProvisionRequest request = drm.getProvisionRequest();
-        URL url = new URL(request.getDefaultUrl());
         result.put("provisionHost", URI.create(request.getDefaultUrl()).getHost());
 
-        byte[] prefix = "{\"signedRequest\":\"".getBytes(StandardCharsets.UTF_8);
-        byte[] suffix = "\"}".getBytes(StandardCharsets.UTF_8);
-        byte[] requestData = request.getData();
-        byte[] body = new byte[prefix.length + requestData.length + suffix.length];
-        System.arraycopy(prefix, 0, body, 0, prefix.length);
-        System.arraycopy(requestData, 0, body, prefix.length, requestData.length);
-        System.arraycopy(suffix, 0, body, prefix.length + requestData.length, suffix.length);
+        // Match the platform MediaPlayer Widevine provisioning flow. The CDM's request data is
+        // already encoded for use as the signedRequest query value; it is not a JSON POST body.
+        String requestUrl = request.getDefaultUrl()
+                + "&signedRequest="
+                + new String(request.getData(), StandardCharsets.UTF_8);
+        URL url = new URL(requestUrl);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setConnectTimeout(15_000);
         connection.setReadTimeout(15_000);
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-        connection.setFixedLengthStreamingMode(body.length);
-        connection.setDoOutput(true);
-        try (OutputStream output = connection.getOutputStream()) {
-            output.write(body);
-        }
+        connection.setDoOutput(false);
+        connection.setDoInput(true);
         int responseCode = connection.getResponseCode();
         result.put("provisionHttpStatus", responseCode);
         if (responseCode < 200 || responseCode >= 300) {
@@ -207,7 +200,7 @@ public final class Main {
         }
     }
 
-    private static final class ProbeResult {
+    static final class ProbeResult {
         final LinkedHashMap<String, Object> values;
         final int exitCode;
 
