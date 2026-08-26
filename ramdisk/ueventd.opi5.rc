@@ -16,6 +16,7 @@ modalias_handling enabled
 /dev/dma_heap/system                                                         0666   system     graphics
 
 # FFmpeg
+/dev/rga                                                                     0660   media      media
 /dev/media*                                                                  0660   media      media
 /dev/video*                                                                  0660   media      media
 
