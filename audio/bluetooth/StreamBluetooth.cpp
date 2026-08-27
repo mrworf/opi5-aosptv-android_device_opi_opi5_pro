@@ -21,6 +21,7 @@
 #include <android-base/logging.h>
 #include <audio_utils/clock.h>
 
+#include "core-impl/A2dpManualSync.h"
 #include "core-impl/StreamBluetooth.h"
 
 using aidl::android::hardware::audio::common::SinkMetadata;
@@ -114,16 +115,27 @@ StreamBluetooth::~StreamBluetooth() {
                                              : mBtDeviceProxy->writeData(buffer, bytesToTransfer);
     *actualFrameCount = bytesTransferred / mFrameSizeBytes;
     PresentationPosition presentation_position;
-    if (!mBtDeviceProxy->getPresentationPosition(presentation_position)) {
+    const bool positionAvailable = mBtDeviceProxy->getPresentationPosition(presentation_position);
+    if (!positionAvailable) {
         presentation_position.remoteDeviceAudioDelayNanos =
                 kBluetoothDefaultRemoteDelayMs * NANOS_PER_MILLISECOND;
         LOG(WARNING) << __func__ << ": getPresentationPosition failed, latency info is unavailable";
     }
-    // TODO(b/317117580): incorporate logic from
-    //                    packages/modules/Bluetooth/system/audio_bluetooth_hw/stream_apis.cc
-    //                    out_calculate_feeding_delay_ms / in_calculate_starving_delay_ms
+    // Preserve the existing result unless A2DP manual sync is enabled. Its Relative path uses
+    // the same validity bounds and fallback model as audio_bluetooth_hw.
     *latencyMs = std::max(*latencyMs, (int32_t)(presentation_position.remoteDeviceAudioDelayNanos /
                                                 NANOS_PER_MILLISECOND));
+    if (a2dp_manual_sync::shouldApply(mIsInput, mBtDeviceProxy->isA2dp())) {
+        const int64_t delayReportMs = presentation_position.remoteDeviceAudioDelayNanos /
+                NANOS_PER_MILLISECOND;
+        const int32_t fallbackLatencyMs =
+                static_cast<int32_t>(getContext().getBufferSizeInFrames() * 1000 /
+                                     getContext().getSampleRate()) +
+                a2dp_manual_sync::kExtraAudioSyncMs;
+        *latencyMs = a2dp_manual_sync::calculateLatencyMs(
+                a2dp_manual_sync::readSettings(), positionAvailable, delayReportMs, *latencyMs,
+                fallbackLatencyMs);
+    }
     return ::android::OK;
 }
 

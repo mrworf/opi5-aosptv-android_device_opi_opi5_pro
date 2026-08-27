@@ -70,6 +70,7 @@ cc_library {
         "alsa/StreamAlsa.cpp",
         "alsa/Utils.cpp",
         "bluetooth/DevicePortProxy.cpp",
+        "bluetooth/A2dpManualSync.cpp",
         "bluetooth/ModuleBluetooth.cpp",
         "bluetooth/StreamBluetooth.cpp",
         "deprecated/StreamSwitcher.cpp",
@@ -109,6 +110,24 @@ cc_library {
     export_shared_lib_headers: [
         "libaudio_aidl_conversion_common_ndk",
     ],
+}
+
+cc_test {
+    name: "a2dp_manual_sync_test",
+    host_supported: true,
+    vendor: true,
+    srcs: [
+        "bluetooth/A2dpManualSync.cpp",
+        "bluetooth/A2dpManualSyncTest.cpp",
+    ],
+    local_include_dirs: ["include"],
+    shared_libs: ["libbase"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+    ],
+    test_suites: ["general-tests"],
 }
 
 cc_library {
