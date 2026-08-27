@@ -49,6 +49,7 @@ ro.soc.model=RK3588s
 persist.vendor.ffmpeg_codec2.rank.audio=16
 persist.vendor.ffmpeg_codec2.rank.video=256
 persist.vendor.ffmpeg_codec2.v4l2.h265=true
+persist.vendor.ffmpeg_codec2.zero_copy_av1=true
 vendor.ffmpeg.use_rga=1
 vendor.ffmpeg.rga_debug=false
 
