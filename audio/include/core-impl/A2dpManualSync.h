@@ -36,4 +36,7 @@ int32_t calculateLatencyMs(const Settings& settings, bool positionAvailable,
                            int64_t delayReportMs, int32_t existingLatencyMs,
                            int32_t fallbackLatencyMs);
 
+int64_t calculatePresentedFrames(int64_t consumedFrames, int32_t sampleRateHz,
+                                 int32_t effectiveLatencyMs, int64_t previousPresentedFrames);
+
 }  // namespace aidl::android::hardware::audio::core::a2dp_manual_sync

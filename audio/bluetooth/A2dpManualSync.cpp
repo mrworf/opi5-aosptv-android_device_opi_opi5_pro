@@ -117,4 +117,15 @@ int32_t calculateLatencyMs(const Settings& settings, bool positionAvailable,
                                                     kMaximumEffectiveLatencyMs));
 }
 
+int64_t calculatePresentedFrames(int64_t consumedFrames, int32_t sampleRateHz,
+                                 int32_t effectiveLatencyMs, int64_t previousPresentedFrames) {
+    if (consumedFrames <= 0 || sampleRateHz <= 0) {
+        return std::max<int64_t>(0, previousPresentedFrames);
+    }
+    const int64_t latencyFrames =
+            static_cast<int64_t>(std::max(0, effectiveLatencyMs)) * sampleRateHz / 1000;
+    const int64_t presentedFrames = std::max<int64_t>(0, consumedFrames - latencyFrames);
+    return std::max(presentedFrames, previousPresentedFrames);
+}
+
 }  // namespace aidl::android::hardware::audio::core::a2dp_manual_sync

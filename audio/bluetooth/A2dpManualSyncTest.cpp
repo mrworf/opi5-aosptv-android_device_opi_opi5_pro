@@ -100,5 +100,24 @@ TEST(A2dpManualSyncTest, AppliesOnlyToA2dpOutput) {
     EXPECT_FALSE(shouldApply(false, false));
 }
 
+TEST(A2dpManualSyncTest, EffectiveLatencyMovesObservablePresentationPosition) {
+    EXPECT_EQ(89857, calculatePresentedFrames(100000, 44100, 230, 0));
+    EXPECT_EQ(98677, calculatePresentedFrames(100000, 44100, 30, 0));
+}
+
+TEST(A2dpManualSyncTest, PresentationPositionDoesNotUnderflow) {
+    EXPECT_EQ(0, calculatePresentedFrames(1000, 48000, 230, 0));
+}
+
+TEST(A2dpManualSyncTest, IncreasedLatencyCannotMovePresentationBackward) {
+    EXPECT_EQ(98677, calculatePresentedFrames(100000, 44100, 230, 98677));
+    EXPECT_EQ(98677, calculatePresentedFrames(108000, 44100, 230, 98677));
+    EXPECT_EQ(98857, calculatePresentedFrames(109000, 44100, 230, 98677));
+}
+
+TEST(A2dpManualSyncTest, ReducedLatencyMayMovePresentationForward) {
+    EXPECT_EQ(98677, calculatePresentedFrames(100000, 44100, 30, 89857));
+}
+
 }  // namespace
 }  // namespace aidl::android::hardware::audio::core::a2dp_manual_sync

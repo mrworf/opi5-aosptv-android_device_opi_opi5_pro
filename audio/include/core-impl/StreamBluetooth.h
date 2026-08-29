@@ -52,6 +52,7 @@ class StreamBluetooth : public StreamCommonImpl {
     ::android::status_t start() override;
     ::android::status_t transfer(void* buffer, size_t frameCount, size_t* actualFrameCount,
                                  int32_t* latencyMs) override;
+    ::android::status_t refinePosition(StreamDescriptor::Position* position) override;
     void shutdown() override;
 
     // Overridden methods of 'StreamCommonImpl', called on a Binder thread.
@@ -69,6 +70,9 @@ class StreamBluetooth : public StreamCommonImpl {
     // The lock is also used to serialize calls to the proxy.
     std::shared_ptr<::android::bluetooth::audio::aidl::BluetoothAudioPortAidl> mBtDeviceProxy
             GUARDED_BY(mLock);  // proxy may be null if the stream is not connected to a device
+    bool mCorrectManualSyncPosition GUARDED_BY(mLock) = false;
+    int32_t mEffectiveLatencyMs GUARDED_BY(mLock) = 0;
+    int64_t mLastObservableFrames GUARDED_BY(mLock) = 0;
 };
 
 class StreamInBluetooth final : public StreamIn, public StreamBluetooth {

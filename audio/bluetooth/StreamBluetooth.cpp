@@ -126,6 +126,7 @@ StreamBluetooth::~StreamBluetooth() {
     *latencyMs = std::max(*latencyMs, (int32_t)(presentation_position.remoteDeviceAudioDelayNanos /
                                                 NANOS_PER_MILLISECOND));
     if (a2dp_manual_sync::shouldApply(mIsInput, mBtDeviceProxy->isA2dp())) {
+        const auto settings = a2dp_manual_sync::readSettings();
         const int64_t delayReportMs = presentation_position.remoteDeviceAudioDelayNanos /
                 NANOS_PER_MILLISECOND;
         const int32_t fallbackLatencyMs =
@@ -133,9 +134,23 @@ StreamBluetooth::~StreamBluetooth() {
                                      getContext().getSampleRate()) +
                 a2dp_manual_sync::kExtraAudioSyncMs;
         *latencyMs = a2dp_manual_sync::calculateLatencyMs(
-                a2dp_manual_sync::readSettings(), positionAvailable, delayReportMs, *latencyMs,
-                fallbackLatencyMs);
+                settings, positionAvailable, delayReportMs, *latencyMs, fallbackLatencyMs);
+        mCorrectManualSyncPosition = settings.manualSync != a2dp_manual_sync::ManualSyncMode::OFF;
+        mEffectiveLatencyMs = *latencyMs;
+    } else {
+        mCorrectManualSyncPosition = false;
     }
+    return ::android::OK;
+}
+
+::android::status_t StreamBluetooth::refinePosition(StreamDescriptor::Position* position) {
+    std::lock_guard guard(mLock);
+    if (mCorrectManualSyncPosition) {
+        position->frames = a2dp_manual_sync::calculatePresentedFrames(
+                position->frames, getContext().getSampleRate(), mEffectiveLatencyMs,
+                mLastObservableFrames);
+    }
+    mLastObservableFrames = std::max(mLastObservableFrames, position->frames);
     return ::android::OK;
 }
 
