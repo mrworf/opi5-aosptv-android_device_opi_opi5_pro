@@ -171,10 +171,6 @@ PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
 # Storage
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
- # Suspend
-PRODUCT_PACKAGES += \
-     com.android.hardware.suspend_blocker.opi5
-
 # Thermal
 PRODUCT_PACKAGES += \
     com.android.hardware.thermal
