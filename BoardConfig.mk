@@ -34,9 +34,9 @@ BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=ttyS2,1500000 no_console_suspend root=/dev/ram0 rootwait androidboot.hardware=opi5
 
-# Package every module enabled by the Orange Pi kernel configuration.  Most hardware modules are
-# loaded on demand through modules.alias/modules.dep, but Android queries the socket-diagnostic
-# families before any device event can trigger them, so load those modules explicitly.
+# Package every module enabled by the Orange Pi kernel configuration. Most hardware modules are
+# loaded on demand through modules.alias/modules.dep. Android-required INET diagnostics are built
+# into the kernel; keep any remaining modular diagnostic families available for early loading.
 OPI5_KERNEL_BUILD_OUT := $(abspath $(DEVICE_PATH)/../../../../kernel-build-out)
 BOARD_VENDOR_KERNEL_MODULES := $(shell find $(OPI5_KERNEL_BUILD_OUT) -type f -name '*.ko' 2>/dev/null | sort)
 OPI5_SOCKET_DIAG_MODULE_NAMES := inet_diag.ko tcp_diag.ko udp_diag.ko raw_diag.ko netlink_diag.ko
