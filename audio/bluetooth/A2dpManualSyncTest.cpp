@@ -33,16 +33,33 @@ TEST(A2dpManualSyncTest, OnAbsoluteIgnoresReportAndFallback) {
     EXPECT_EQ(330, calculateLatencyMs(settings, false, 0, 200, 210));
 }
 
-TEST(A2dpManualSyncTest, AutoPassesThroughValidReport) {
+TEST(A2dpManualSyncTest, HybridRelativeOffsetsValidReport) {
+    Settings settings{ManualSyncMode::AUTO, DelayMode::RELATIVE, 50, 200};
+    EXPECT_EQ(450, calculateLatencyMs(settings, true, 400, 400, 210));
+}
+
+TEST(A2dpManualSyncTest, HybridRelativeOffsetsFallbackWithoutValidReport) {
+    Settings settings{ManualSyncMode::AUTO, DelayMode::RELATIVE, 30, 200};
+    EXPECT_EQ(240, calculateLatencyMs(settings, true, 0, 0, 210));
+    EXPECT_EQ(240, calculateLatencyMs(settings, false, 0, 200, 210));
+}
+
+TEST(A2dpManualSyncTest, HybridAbsolutePassesThroughValidReport) {
     Settings settings{ManualSyncMode::AUTO, DelayMode::ABSOLUTE, 0, 330};
     EXPECT_EQ(400, calculateLatencyMs(settings, true, 400, 400, 210));
 }
 
-TEST(A2dpManualSyncTest, AutoUsesConfiguredModeWithoutValidReport) {
-    Settings relative{ManualSyncMode::AUTO, DelayMode::RELATIVE, 30, 200};
-    Settings absolute{ManualSyncMode::AUTO, DelayMode::ABSOLUTE, 0, 330};
-    EXPECT_EQ(240, calculateLatencyMs(relative, true, 0, 0, 210));
-    EXPECT_EQ(330, calculateLatencyMs(absolute, true, 0, 0, 210));
+TEST(A2dpManualSyncTest, HybridAbsoluteUsesConfiguredFallbackWithoutValidReport) {
+    Settings settings{ManualSyncMode::AUTO, DelayMode::ABSOLUTE, 0, 330};
+    EXPECT_EQ(330, calculateLatencyMs(settings, true, 0, 0, 210));
+    EXPECT_EQ(330, calculateLatencyMs(settings, false, 0, 200, 210));
+}
+
+TEST(A2dpManualSyncTest, HybridRelativeEffectiveLatencyIsClampedWithValidReport) {
+    Settings low{ManualSyncMode::AUTO, DelayMode::RELATIVE, -500, 200};
+    Settings high{ManualSyncMode::AUTO, DelayMode::RELATIVE, 500, 200};
+    EXPECT_EQ(0, calculateLatencyMs(low, true, 51, 51, 210));
+    EXPECT_EQ(1249, calculateLatencyMs(high, true, 999, 999, 210));
 }
 
 TEST(A2dpManualSyncTest, DelayReportBoundariesAreRejected) {

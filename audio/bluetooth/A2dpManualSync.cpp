@@ -98,7 +98,8 @@ int32_t calculateLatencyMs(const Settings& settings, bool positionAvailable,
     if (settings.manualSync == ManualSyncMode::OFF) return existingLatencyMs;
 
     const bool validReport = isValidDelayReport(positionAvailable, delayReportMs);
-    if (settings.manualSync == ManualSyncMode::AUTO && validReport) {
+    if (settings.manualSync == ManualSyncMode::AUTO &&
+            settings.delayMode == DelayMode::ABSOLUTE && validReport) {
         return static_cast<int32_t>(delayReportMs);
     }
 
