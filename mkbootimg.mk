@@ -9,7 +9,7 @@ DEVICE_PATH := device/opi/opi5_pro
 KERNEL_PATH := device/opi/opi5_pro-kernel
 
 OPI_BOOT_OUT := $(PRODUCT_OUT)/opiboot
-$(OPI_BOOT_OUT): $(INSTALLED_RAMDISK_TARGET) $(KERNEL_PATH)/Image $(KERNEL_PATH)/config.txt $(KERNEL_PATH)/rk3588s-orangepi-5.dtb
+$(OPI_BOOT_OUT): $(INSTALLED_RAMDISK_TARGET) $(KERNEL_PATH)/Image $(KERNEL_PATH)/boot.scr $(KERNEL_PATH)/config.txt $(KERNEL_PATH)/rk3588s-orangepi-5.dtb
 	mkdir -p $(OPI_BOOT_OUT)
 	cp $(KERNEL_PATH)/Image $(OPI_BOOT_OUT)
 	cp $(KERNEL_PATH)/rk3588s-orangepi-5-pro-1.dtb $(OPI_BOOT_OUT)
