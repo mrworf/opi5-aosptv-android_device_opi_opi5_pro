@@ -1,0 +1,11 @@
+// Copyright (C) 2026 The Android Open Source Project
+// SPDX-License-Identifier: Apache-2.0
+
+runtime_resource_overlay {
+    name: "AndroidTvOpiFrameworkOverlay",
+    certificate: "platform",
+    product_specific: true,
+    resource_dirs: ["res"],
+    sdk_version: "current",
+    flags_packages: ["android.view.inputmethod.flags-aconfig"],
+}
