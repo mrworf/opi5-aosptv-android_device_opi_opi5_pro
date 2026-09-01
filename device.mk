@@ -193,6 +193,8 @@ PRODUCT_COPY_FILES += \
 # kernel does not provide the pKVM support required by AVF.
 
 # Wifi
+$(call inherit-product, $(DEVICE_PATH)/firmware/usb_wifi/usb_wifi_firmware.mk)
+
 PRODUCT_PACKAGES += \
     com.android.hardware.wifi \
     com.android.hardware.wifi.hostapd.opi5 \

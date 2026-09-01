@@ -33,6 +33,7 @@ TARGET_USES_MINIGBM_GBM_MESA := false
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=ttyS2,1500000 no_console_suspend root=/dev/ram0 rootwait androidboot.hardware=opi5
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 
 # Package every module enabled by the Orange Pi kernel configuration. Most hardware modules are
 # loaded on demand through modules.alias/modules.dep. Android-required INET diagnostics are built

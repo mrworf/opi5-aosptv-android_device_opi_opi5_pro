@@ -1,0 +1,236 @@
+{
+  "source": {
+    "repository": "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git",
+    "commit": "e981caea6ed33c48d25b7dbf473327dbd01df163"
+  },
+  "entries": [
+    {
+      "install_path": "ath9k_htc/htc_7010-1.4.0.fw",
+      "upstream_path": "ath9k_htc/htc_7010-1.4.0.fw",
+      "sha256": "737850aaf66ca13f82e0f5ca5e758f606f840c2f23c291350ab916bbf88e6f75",
+      "license": "LICENCE.open-ath9k-htc-firmware"
+    },
+    {
+      "install_path": "ath9k_htc/htc_9271-1.4.0.fw",
+      "upstream_path": "ath9k_htc/htc_9271-1.4.0.fw",
+      "sha256": "78f7d592a95b419a02fde7440f30c606fc31a871cf0ce150ced40d4857173eb0",
+      "license": "LICENCE.open-ath9k-htc-firmware"
+    },
+    {
+      "install_path": "ar5523.bin",
+      "upstream_path": "ar5523.bin",
+      "sha256": "352f07dda4dc263426550cb23304d4684011cde0a67d701ae8a673906b1063e0",
+      "license": "LICENCE.atheros_firmware"
+    },
+    {
+      "install_path": "carl9170-1.fw",
+      "upstream_path": "carl9170-1.fw",
+      "sha256": "e1695dbfbc6aa7bb3182615bd47905e2df808317e4050878e50bb24285b37068",
+      "license": "GPL-2.0"
+    },
+    {
+      "install_path": "mt7601u.bin",
+      "upstream_path": "mediatek/mt7601u.bin",
+      "sha256": "4511b1d840e22aea2bf5fdca419c91c0d94cbfb291b9ac4f8be6d9100d1a7046",
+      "license": "LICENCE.ralink_a_mediatek_company_firmware"
+    },
+    {
+      "install_path": "mediatek/mt7610e.bin",
+      "upstream_path": "mediatek/mt7610e.bin",
+      "sha256": "538d08c08f8fb5aa05cacf34e49aeb307e8b2dc094407fc655fbf3580c893953",
+      "license": "LICENCE.mediatek"
+    },
+    {
+      "install_path": "mediatek/mt7610u.bin",
+      "upstream_path": "mediatek/mt7610u.bin",
+      "sha256": "5a4268e9021bb587426ba624b425f1e660bfc82cd63b36ad3ce6fb9ce6751760",
+      "license": "LICENCE.mediatek"
+    },
+    {
+      "install_path": "mt7662.bin",
+      "upstream_path": "mediatek/mt7662.bin",
+      "sha256": "f7e52492f58088cae50e51a54cca68e4abc5b74f7d0b6b731dbb4c04465a94b6",
+      "license": "LICENCE.ralink_a_mediatek_company_firmware"
+    },
+    {
+      "install_path": "mt7662_rom_patch.bin",
+      "upstream_path": "mediatek/mt7662_rom_patch.bin",
+      "sha256": "6f0e871268f6e4d99196d90d89bcc09fe493d010366260a2cfcaa5dd66095f8c",
+      "license": "LICENCE.ralink_a_mediatek_company_firmware"
+    },
+    {
+      "install_path": "rt73.bin",
+      "upstream_path": "rt73.bin",
+      "sha256": "a57745fa55b7700ff410bc69f3630c889e46d771ac17f6c48bda1c02908116bc",
+      "license": "LICENCE.ralink-firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8723aufw_A.bin",
+      "upstream_path": "rtlwifi/rtl8723aufw_A.bin",
+      "sha256": "d63e39f41dd726b3a833e64fea44696c7b74ad595d31dcaae509b17d247f125c",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8723aufw_B.bin",
+      "upstream_path": "rtlwifi/rtl8723aufw_B.bin",
+      "sha256": "850374b96076ab4b854ee9dc42ef57f9bd6b24493b74ba6b609c690d17f1c552",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8723aufw_B_NoBT.bin",
+      "upstream_path": "rtlwifi/rtl8723aufw_B_NoBT.bin",
+      "sha256": "a24af5491dbfa3937633049fc66576ed478dec60e7676263f00a2ce9dd22c25b",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8188eufw.bin",
+      "upstream_path": "rtlwifi/rtl8188eufw.bin",
+      "sha256": "2ff74315287529dec2e50eb57d6e0c97d2116f28ae166773ccdf93b6360000c4",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8192cufw.bin",
+      "upstream_path": "rtlwifi/rtl8192cufw.bin",
+      "sha256": "6327de71c544c27fe909d509a3d5605d46b94c102a3c27700f812b95cbe74254",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8192cufw_A.bin",
+      "upstream_path": "rtlwifi/rtl8192cufw_A.bin",
+      "sha256": "32846065b017c8b1d2d448e8c0ea2f5e741424809be49f2c6a6261339cd0b0cf",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8192cufw_B.bin",
+      "upstream_path": "rtlwifi/rtl8192cufw_B.bin",
+      "sha256": "479e5e6732b0e07cfcab4cc190b8c30465c0b7f8c0ed22d742bedd4412cbcf2a",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8192cufw_TMSC.bin",
+      "upstream_path": "rtlwifi/rtl8192cufw_TMSC.bin",
+      "sha256": "c083f2db36ef33d0ffffc979aba1d40f55fa9dc38dce50f26e0108a21c080286",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8192eu_nic.bin",
+      "upstream_path": "rtlwifi/rtl8192eu_nic.bin",
+      "sha256": "b15bc955fba2fc3abc093affe62c9f7284a0b84d4f13f8ce55366488dc9aad8b",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8723bu_nic.bin",
+      "upstream_path": "rtlwifi/rtl8723bu_nic.bin",
+      "sha256": "a52b5a7be4841b4b2839eddf5122b3300a3610866abe4bb3c3c9e444c8ab7969",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8188fufw.bin",
+      "upstream_path": "rtlwifi/rtl8188fufw.bin",
+      "sha256": "e6189d6d7032b83f0ed4284629c43db66262449a866f33fd329e611239f62e1f",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8710bufw_SMIC.bin",
+      "upstream_path": "rtlwifi/rtl8710bufw_SMIC.bin",
+      "sha256": "5601323d5840f81aae228545ef6a7285afefcc0979c286a296e3ec731d67177d",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8710bufw_UMC.bin",
+      "upstream_path": "rtlwifi/rtl8710bufw_UMC.bin",
+      "sha256": "ca3701b33c715136d818fd7fc95ef851c30f2fd9d5e265781094c7234fc7da01",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8192fufw.bin",
+      "upstream_path": "rtlwifi/rtl8192fufw.bin",
+      "sha256": "3001f8b50176ede76d0cde20c7c7ff84ebe12331049e65e1a1a768b1d45b74de",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtlwifi/rtl8723bu_bt.bin",
+      "upstream_path": "rtlwifi/rtl8723bs_bt.bin",
+      "sha256": "774f6628ae2cd7d6d8563cbf88f67f9a95e895cb44b55fb26ffdf895fdf26aea",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw88/rtw8723d_fw.bin",
+      "upstream_path": "rtw88/rtw8723d_fw.bin",
+      "sha256": "9c64e079815a333a3f7b731be7cc0be65206ebc883891659dc8ff5ed36a5e2f5",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw88/rtw8822b_fw.bin",
+      "upstream_path": "rtw88/rtw8822b_fw.bin",
+      "sha256": "a72da690597bfa99d8eb6fc2ab090d18d8ad92ac2befd35db1c9e3662d8d8418",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw88/rtw8821c_fw.bin",
+      "upstream_path": "rtw88/rtw8821c_fw.bin",
+      "sha256": "2ef409bc418549fcf294061dd0cae1fc22fd9da79b60524950b25de18732f3f0",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw88/rtw8821a_fw.bin",
+      "upstream_path": "rtw88/rtw8821a_fw.bin",
+      "sha256": "4693ece655044d96f81bd3f3e8db14dc352b493219c4fd0a75788a6fbd9eac3c",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw88/rtw8812a_fw.bin",
+      "upstream_path": "rtw88/rtw8812a_fw.bin",
+      "sha256": "abdcca4e8bf76ebfba23d433de310ffefebd0ff9d01990639d4cd9602b32b71a",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw88/rtw8814a_fw.bin",
+      "upstream_path": "rtw88/rtw8814a_fw.bin",
+      "sha256": "aa6bf9d62b2d2d8a37254fd6d917ba2839888cdedc21850d4481874cb1d3d7cb",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw89/rtw8851b_fw.bin",
+      "upstream_path": "rtw89/rtw8851b_fw.bin",
+      "sha256": "945c854d7cf69dd97bf1da0181b011787d9b3c5d59c47e8b9dbea4eb4eee170b",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "rtw89/rtw8852b_fw-1.bin",
+      "upstream_path": "rtw89/rtw8852b_fw-1.bin",
+      "sha256": "5b68415e3bfe72715d63a70703d4471b04b5475b8ff69cfdc8cdf48233cd5d3a",
+      "license": "LICENCE.rtlwifi_firmware.txt"
+    },
+    {
+      "install_path": "brcm/brcmfmac43143.bin",
+      "upstream_path": "brcm/brcmfmac43143.bin",
+      "sha256": "a0ace23094652c3aa3bcd480906b1a769d0169afcc3b5f074b187a30d8617e03",
+      "license": "LICENCE.broadcom_bcm43xx"
+    },
+    {
+      "install_path": "brcm/brcmfmac43236b.bin",
+      "upstream_path": "brcm/brcmfmac43236b.bin",
+      "sha256": "2138a2edca76a1f808250fd89381b30529938e04b2a9befa138afda71a9c96e4",
+      "license": "LICENCE.broadcom_bcm43xx"
+    },
+    {
+      "install_path": "brcm/brcmfmac43242a.bin",
+      "upstream_path": "brcm/brcmfmac43242a.bin",
+      "sha256": "3cb5eccfad59736241d6207322f4aa26505fe6129c957f2742b4168593304487",
+      "license": "LICENCE.broadcom_bcm43xx"
+    },
+    {
+      "install_path": "brcm/brcmfmac43569.bin",
+      "upstream_path": "brcm/brcmfmac43569.bin",
+      "sha256": "0a57d51cd676b98e3313463dccf7fa9aadafe52a45216b7a919a379cd8f07f1d",
+      "license": "LICENCE.broadcom_bcm43xx"
+    },
+    {
+      "install_path": "brcm/brcmfmac4373.bin",
+      "upstream_path": "brcm/brcmfmac4373.bin",
+      "sha256": "5ad7af8a9605a23bf714e612313b55b8cf8b152cea19ad49d8744f6c602dcc5a",
+      "license": "LICENCE.broadcom_bcm43xx"
+    }
+  ]
+}
