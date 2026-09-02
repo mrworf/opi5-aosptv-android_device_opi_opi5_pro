@@ -8,6 +8,10 @@
 # Inherit device configuration
 $(call inherit-product, device/opi/opi5_pro/device.mk)
 
+# Extend the selected platform release with Orange Pi TV-specific aconfig values.
+PRODUCT_RELEASE_CONFIG_MAPS += \
+    $(wildcard build/release/opi5_pro/release_config_map.textproto)
+
 # Pre-authorize the build workstation without disabling ADB authentication.
 PRODUCT_ADB_KEYS := device/opi/opi5_pro/adb_keys
 
@@ -38,7 +42,11 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth
 PRODUCT_VENDOR_PROPERTIES += \
-    bluetooth.device.class_of_device=34,4,36
+    bluetooth.device.class_of_device=34,4,36 \
+    bluetooth.power.suspend.disconnect_acl.enabled=true \
+    bluetooth.power.suspend.scan_mode_none.enabled=true \
+    bluetooth.power.suspend.stop_le_scan.enabled=true \
+    bluetooth.power.suspend.pause_advertisement.enabled=true
 
 # Boot animation
 PRODUCT_COPY_FILES += \
