@@ -519,7 +519,7 @@ RetCode BundleContext::updateControlParameter(const std::vector<Equalizer::BandL
                     RetCode::ERROR_EFFECT_LIB_ERROR, " setControlParamFailed");
 
     mBandGainmB = tempLevel;
-    return RetCode::SUCCESS;
+    return limitLevel();
 }
 
 RetCode BundleContext::setBassBoostStrength(int strength) {

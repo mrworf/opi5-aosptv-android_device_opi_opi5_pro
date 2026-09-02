@@ -26,7 +26,7 @@
 namespace aidl::android::hardware::audio::effect {
 namespace lvm {
 
-constexpr inline size_t MAX_NUM_PRESETS = 10;
+constexpr inline size_t MAX_NUM_PRESETS = 12;
 constexpr inline size_t MAX_NUM_BANDS = 5;
 constexpr inline size_t MAX_CALL_SIZE = 256;
 constexpr inline int BASS_BOOST_CUP_LOAD_ARM9E = 150;   // Expressed in 0.1 MIPS
@@ -61,13 +61,16 @@ constexpr inline std::array<std::array<int16_t, MAX_NUM_BANDS>, MAX_NUM_PRESETS>
          {4, 1, 9, 3, 0},    /* Heavy Metal Preset */
          {5, 3, 0, 1, 3},    /* Hip Hop Preset */
          {4, 2, -2, 2, 5},   /* Jazz Preset */
-         {-1, 2, 5, 1, -2},  /* Pop Preset */
-         {5, 3, -1, 3, 5}}}; /* Rock Preset */
+         {-1, 2, 5, 1, -2},   /* Pop Preset */
+         {5, 3, -1, 3, 5},    /* Rock Preset */
+         {-4, -2, 2, 4, 1},   /* Voice Clarity Preset */
+         {-8, -4, 0, 2, 0}}}; /* Night Preset */
 
 static const std::vector<Equalizer::Preset> kEqPresets = {
         {-1, "Custom"}, {0, "Normal"}, {1, "Classical"},   {2, "Dance"},
         {3, "Flat"},    {4, "Folk"},   {5, "Heavy Metal"}, {6, "Hip Hop"},
-        {7, "Jazz"},    {8, "Pop"},    {9, "Rock"}};
+        {7, "Jazz"},    {8, "Pop"},    {9, "Rock"},
+        {10, "Voice clarity"}, {11, "Night"}};
 
 const std::vector<Range::EqualizerRange> kEqRanges = {
         MAKE_RANGE(Equalizer, preset, 0, MAX_NUM_PRESETS - 1),
@@ -89,6 +92,8 @@ static const Descriptor kEqualizerDesc = {
                    .flags = {.type = Flags::Type::INSERT,
                              .insert = Flags::Insert::FIRST,
                              .volume = Flags::Volume::CTRL},
+                   .cpuLoad = EQUALIZER_CUP_LOAD_ARM9E,
+                   .memoryUsage = BUNDLE_MEM_USAGE,
                    .name = kEqualizerEffectName,
                    .implementor = "NXP Software Ltd."},
         .capability = kEqCap};
