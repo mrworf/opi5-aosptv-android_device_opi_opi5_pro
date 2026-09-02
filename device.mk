@@ -52,17 +52,16 @@ PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
 PRODUCT_PACKAGES += \
     com.android.hardware.drm.clearkey
 
-# Widevine is proprietary and is never part of this source repository. The
-# explicit build flag keeps ordinary AOSP builds reproducible while making a
-# requested Widevine build fail instead of silently shipping ClearKey alone.
-ifeq ($(OPI5_INCLUDE_WIDEVINE_L3),1)
+# Widevine is proprietary and staged locally rather than committed to this
+# source repository. It is mandatory for the Orange Pi Android TV product: a
+# missing local bundle must fail the build instead of silently shipping an
+# image with ClearKey alone.
 OPI5_WIDEVINE_LOCAL_MK := vendor/opi/widevine_local/widevine-vendor.mk
 ifeq ($(wildcard $(OPI5_WIDEVINE_LOCAL_MK)),)
-$(error OPI5_INCLUDE_WIDEVINE_L3=1 but $(OPI5_WIDEVINE_LOCAL_MK) is missing)
+$(error Required Widevine L3 bundle $(OPI5_WIDEVINE_LOCAL_MK) is missing)
 endif
 PRODUCT_SOONG_NAMESPACES += vendor/opi/widevine_local
 $(call inherit-product, $(OPI5_WIDEVINE_LOCAL_MK))
-endif
 
 # Emergency info
 PRODUCT_PACKAGES += \
