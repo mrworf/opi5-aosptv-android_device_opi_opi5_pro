@@ -6,7 +6,10 @@
 #
 
 DEVICE_PATH := device/opi/opi5_pro
-KERNEL_PATH := device/opi/opi5_pro-kernel
+ifeq ($(strip $(OPI5_KERNEL_PACKAGE_DIR)),)
+$(error OPI5_KERNEL_PACKAGE_DIR is required; build through the opi5_tv workspace)
+endif
+KERNEL_PATH := $(OPI5_KERNEL_PACKAGE_DIR)
 
 OPI_BOOT_OUT := $(PRODUCT_OUT)/opiboot
 $(OPI_BOOT_OUT): $(INSTALLED_RAMDISK_TARGET) $(KERNEL_PATH)/Image $(KERNEL_PATH)/boot.scr $(KERNEL_PATH)/config.txt $(KERNEL_PATH)/rk3588s-orangepi-5.dtb

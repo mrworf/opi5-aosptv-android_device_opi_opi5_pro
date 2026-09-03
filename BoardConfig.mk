@@ -38,8 +38,19 @@ BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 # Package every module enabled by the Orange Pi kernel configuration. Most hardware modules are
 # loaded on demand through modules.alias/modules.dep. Android-required INET diagnostics are built
 # into the kernel; keep any remaining modular diagnostic families available for early loading.
-OPI5_KERNEL_BUILD_OUT := $(abspath $(DEVICE_PATH)/../../../../kernel-build-out)
+ifeq ($(strip $(OPI5_KERNEL_BUILD_OUT)),)
+$(error OPI5_KERNEL_BUILD_OUT is required; build through the opi5_tv workspace)
+endif
+ifeq ($(wildcard $(OPI5_KERNEL_BUILD_OUT)/arch/arm64/boot/Image),)
+$(error Missing built kernel Image under $(OPI5_KERNEL_BUILD_OUT))
+endif
+ifneq ($(shell grep -c '^CONFIG_MODVERSIONS=y$$' $(OPI5_KERNEL_BUILD_OUT)/.config 2>/dev/null),1)
+$(error The staged kernel must enable CONFIG_MODVERSIONS)
+endif
 BOARD_VENDOR_KERNEL_MODULES := $(shell find $(OPI5_KERNEL_BUILD_OUT) -type f -name '*.ko' 2>/dev/null | sort)
+ifeq ($(strip $(BOARD_VENDOR_KERNEL_MODULES)),)
+$(error No matching kernel modules found under $(OPI5_KERNEL_BUILD_OUT))
+endif
 OPI5_SOCKET_DIAG_MODULE_NAMES := inet_diag.ko tcp_diag.ko udp_diag.ko raw_diag.ko netlink_diag.ko
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(foreach module,$(OPI5_SOCKET_DIAG_MODULE_NAMES),\
     $(filter %/$(module),$(BOARD_VENDOR_KERNEL_MODULES)))

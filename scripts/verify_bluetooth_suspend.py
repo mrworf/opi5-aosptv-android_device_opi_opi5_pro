@@ -34,8 +34,8 @@ def parse_properties(text: str) -> dict[str, str]:
 
 def verify_source(device_root: Path, release_root: Path) -> list[str]:
     errors: list[str] = []
-    product_mk = (device_root / "aosp_opi5_pro_tv.mk").read_text(encoding="utf-8")
-    if "build/release/opi5_pro/release_config_map.textproto" not in product_mk:
+    product_mk = (device_root / "aosp_opi5_tv_common.mk").read_text(encoding="utf-8")
+    if "build/release/opi5/release_config_map.textproto" not in product_mk:
         errors.append("TV product does not include its release-config map")
 
     properties = parse_properties(product_mk)

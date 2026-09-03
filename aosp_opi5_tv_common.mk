@@ -1,38 +1,41 @@
 #
-# Copyright (C) 2021-2023 KonstaKANG
-# Copyright (C) 2025 Venkata Atchuta Bheemeswara Sarma Darbha
-#
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Inherit device configuration
 $(call inherit-product, device/opi/opi5_pro/device.mk)
 
-# Extend the selected platform release with Orange Pi TV-specific aconfig values.
-PRODUCT_RELEASE_CONFIG_MAPS += \
-    $(wildcard build/release/opi5_pro/release_config_map.textproto)
+ifeq ($(strip $(OPI5_PRODUCT_PROFILE_MK)),)
+$(error OPI5_PRODUCT_PROFILE_MK is required; build through the opi5_tv workspace)
+endif
+ifeq ($(wildcard $(OPI5_PRODUCT_PROFILE_MK)),)
+$(error OPI5 product profile does not exist: $(OPI5_PRODUCT_PROFILE_MK))
+endif
+include $(OPI5_PRODUCT_PROFILE_MK)
 
-# Pre-authorize the build workstation without disabling ADB authentication.
-PRODUCT_ADB_KEYS := device/opi/opi5_pro/adb_keys
+ifeq ($(strip $(OPI5_ADB_KEYS)),)
+$(error OPI5_ADB_KEYS is required; run ./configure-adb-key in the opi5_tv workspace)
+endif
+ifeq ($(wildcard $(OPI5_ADB_KEYS)),)
+$(error OPI5 ADB public key does not exist: $(OPI5_ADB_KEYS))
+endif
+PRODUCT_ADB_KEYS := $(OPI5_ADB_KEYS)
+
+OPI5_RELEASE_CONFIG_MAP := build/release/opi5/release_config_map.textproto
+ifeq ($(wildcard $(OPI5_RELEASE_CONFIG_MAP)),)
+$(error Missing Orange Pi 5 release configuration: $(OPI5_RELEASE_CONFIG_MAP))
+endif
+PRODUCT_RELEASE_CONFIG_MAPS += $(OPI5_RELEASE_CONFIG_MAP)
 
 PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_CHARACTERISTICS := tv
 
-# Preserve logcat under /data/misc/logd so a failed headless boot can be
-# diagnosed by attaching the NVMe to the build workstation.
 PRODUCT_PRODUCT_PROPERTIES += \
     logd.logpersistd=logcatd
 
-# This TV has no Car watchdog service or resource-overuse configuration.
 PRODUCT_ENABLE_TV_IOWATCHDOG := false
 $(call inherit-product, device/google/atv/products/atv_base.mk)
 $(call enforce-product-packages-exist,com.android.ranging vendor_tracing_descriptors)
 
-# Google TV services and Play Store, without replacing the AOSP TV launcher.
-GMS_VARIANT := minimal
-$(call inherit-product, vendor/gapps_tv/arm64/arm64-vendor.mk)
-
-# Android TV
 PRODUCT_PACKAGES += \
     DocumentsUI \
     LeanbackIME \
@@ -40,7 +43,6 @@ PRODUCT_PACKAGES += \
     TvSampleLeanbackLauncher \
     TvSettingsTwoPanel
 
-# Bluetooth
 PRODUCT_VENDOR_PROPERTIES += \
     bluetooth.device.class_of_device=34,4,36 \
     bluetooth.power.suspend.disconnect_acl.enabled=true \
@@ -48,11 +50,9 @@ PRODUCT_VENDOR_PROPERTIES += \
     bluetooth.power.suspend.stop_le_scan.enabled=true \
     bluetooth.power.suspend.pause_advertisement.enabled=true
 
-# Boot animation
 PRODUCT_COPY_FILES += \
     device/google/atv/products/bootanimations/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
 
-# Overlays
 PRODUCT_PACKAGES += \
     AndroidTvOpiFrameworkOverlay \
     AndroidTvNativeResolutionOverlay \
@@ -61,9 +61,9 @@ PRODUCT_PACKAGES += \
     SettingsProviderTvOpiOverlay \
     WifiOpiOverlay
 
-# Device identifier. This must come after all inclusions.
+# TARGET_DEVICE must retain the upstream directory name so Android can locate
+# BoardConfig.mk. Public product, model, image, and DTB names identify OPI5.
 PRODUCT_DEVICE := opi5_pro
-PRODUCT_NAME := aosp_opi
 PRODUCT_BRAND := Orangepi
 PRODUCT_MODEL := Orange Pi 5
 PRODUCT_MANUFACTURER := Orangepi
