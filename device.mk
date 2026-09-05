@@ -6,7 +6,6 @@
 
 DEVICE_PATH := device/opi/opi5_pro
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
-PRODUCT_SOONG_NAMESPACES += vendor/opi/youtube_tv
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, frameworks/native/build/tablet-7in-xhdpi-2048-dalvik-heap.mk)
@@ -197,8 +196,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
 PRODUCT_PACKAGES += \
-    Jelly \
-    YouTubeTV
+    Jelly
 
 # Window extensions
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
