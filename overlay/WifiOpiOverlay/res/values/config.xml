@@ -34,8 +34,8 @@
     <!-- Wifi driver supports IEEE80211AC for softap -->
     <bool translatable="false" name="config_wifi_softap_ieee80211ac_supported">true</bool>
 
-    <!-- Do not translate. Default access point SSID used for tethering -->
-    <string name="wifi_tether_configure_ssid_default" translatable="false">Orange Pi 5 Pro</string>
+    <!-- Use the product model as the initial tethering SSID. -->
+    <bool translatable="false" name="config_wifiUseProductModelForDefaultSsid">true</bool>
 
      <!-- Indicate whether the verbose logging is always on -->
      <!-- 0: verbose logging controlled by user

@@ -29,6 +29,11 @@ PRODUCT_RELEASE_CONFIG_MAPS += $(OPI5_RELEASE_CONFIG_MAP)
 PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_CHARACTERISTICS := tv
 
+# Canonical user-visible hardware name. First-boot Settings, Bluetooth, and
+# Wi-Fi defaults derive from PRODUCT_MODEL instead of carrying independent
+# board-name strings.
+OPI5_PRODUCT_DISPLAY_NAME := Orange Pi 5
+
 PRODUCT_PRODUCT_PROPERTIES += \
     logd.logpersistd=logcatd
 
@@ -64,6 +69,6 @@ PRODUCT_PACKAGES += \
 # TARGET_DEVICE must retain the upstream directory name so Android can locate
 # BoardConfig.mk. Public product, model, image, and DTB names identify OPI5.
 PRODUCT_DEVICE := opi5_pro
-PRODUCT_BRAND := Orangepi
-PRODUCT_MODEL := Orange Pi 5
-PRODUCT_MANUFACTURER := Orangepi
+PRODUCT_BRAND := opi5-aosptv
+PRODUCT_MODEL := $(OPI5_PRODUCT_DISPLAY_NAME)
+PRODUCT_MANUFACTURER := Community
