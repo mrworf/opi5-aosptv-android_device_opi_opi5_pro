@@ -12,6 +12,10 @@ $(error OPI5 product profile does not exist: $(OPI5_PRODUCT_PROFILE_MK))
 endif
 include $(OPI5_PRODUCT_PROFILE_MK)
 
+ifneq ($(OPI5_BUILD_VARIANT),$(TARGET_BUILD_VARIANT))
+$(error OPI5_BUILD_VARIANT=$(OPI5_BUILD_VARIANT) does not match TARGET_BUILD_VARIANT=$(TARGET_BUILD_VARIANT))
+endif
+
 ifeq ($(strip $(OPI5_ADB_KEYS)),)
 $(error OPI5_ADB_KEYS is required; run ./configure-adb-key in the opi5_tv workspace)
 endif
@@ -34,8 +38,9 @@ PRODUCT_CHARACTERISTICS := tv
 # board-name strings.
 OPI5_PRODUCT_DISPLAY_NAME := Orange Pi 5
 
-PRODUCT_PRODUCT_PROPERTIES += \
-    logd.logpersistd=logcatd
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PRODUCT_PROPERTIES += logd.logpersistd=logcatd
+endif
 
 PRODUCT_ENABLE_TV_IOWATCHDOG := false
 $(call inherit-product, device/google/atv/products/atv_base.mk)

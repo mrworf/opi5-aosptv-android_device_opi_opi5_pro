@@ -15,4 +15,6 @@ COMMON_LUNCH_CHOICES := \
     aosp_opi5_pro-trunk_staging-userdebug \
     aosp_opi5_pro_car-trunk_staging-userdebug \
     aosp_opi5_tv_oss-cp2a-userdebug \
-    aosp_opi5_tv_custom-cp2a-userdebug
+    aosp_opi5_tv_oss-cp2a-user \
+    aosp_opi5_tv_custom-cp2a-userdebug \
+    aosp_opi5_tv_custom-cp2a-user

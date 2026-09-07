@@ -47,7 +47,11 @@ PRODUCT_PACKAGES += \
     com.android.hardware.tv.hdmi.connection.opi5
 
 # Debugfs
+ifeq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+else
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
+endif
 
 # DRM
 PRODUCT_PACKAGES += \

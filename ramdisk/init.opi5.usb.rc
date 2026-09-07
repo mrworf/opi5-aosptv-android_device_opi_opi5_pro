@@ -1,4 +1,4 @@
-on boot
+on boot && property:ro.debuggable=1
     # This board uses every external USB connector in host mode.  Keep adbd on
     # authenticated Ethernet/TCP only and do not create FunctionFS endpoints:
     # their presence makes adbd continuously retry the unavailable gadget UDC.
@@ -15,7 +15,7 @@ on property:sys.usb.config=adb
     setprop sys.usb.config none
     setprop sys.usb.state none
 
-on post-fs-data
+on post-fs-data && property:ro.debuggable=1
     mkdir /data/misc/dmesgd 0700 root root
     start opi-dmesg-capture
 
