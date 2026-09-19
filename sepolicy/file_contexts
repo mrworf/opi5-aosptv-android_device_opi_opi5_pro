@@ -49,4 +49,5 @@
 
 #V4L2
 /dev/rga  u:object_r:video_device:s0
+/dev/media[0-9]*  u:object_r:video_device:s0
 /vendor/bin/hw/android\.hardware\.media\.c2@1\.2-service-v4l2(.*)?  u:object_r:mediacodec_exec:s0

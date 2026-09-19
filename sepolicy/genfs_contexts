@@ -6,6 +6,19 @@ genfscon sysfs /devices/platform/display-subsystem/drm/card1/card1-HDMI-A-1/stat
 genfscon sysfs /devices/platform/fb000000.gpu              u:object_r:sysfs_gpu:s0
 genfscon sysfs /devices/platform/display-subsystem         u:object_r:sysfs_gpu:s0
 
+# libudev enumerates character-device links here to discover media-controller
+# devices. Keep this separate from generic sysfs so Codec2 does not gain
+# directory-read access across the rest of sysfs.
+genfscon sysfs /dev/char                                   u:object_r:sysfs_char_devices:s0
+
+# V4L2-request discovery follows the media-controller links above into these
+# RK3588 codec nodes and reads their uevent metadata.
+genfscon sysfs /devices/platform/fdb50000.video-codec      u:object_r:sysfs_video_codec:s0
+genfscon sysfs /devices/platform/fdba0000.video-codec      u:object_r:sysfs_video_codec:s0
+genfscon sysfs /devices/platform/fdc38100.video-codec      u:object_r:sysfs_video_codec:s0
+genfscon sysfs /devices/platform/fdc70000.video-codec      u:object_r:sysfs_video_codec:s0
+genfscon sysfs /bus/media                                  u:object_r:sysfs_video_codec:s0
+
 # Lights
 genfscon sysfs /class/backlight/11-0045/brightness      u:object_r:sysfs_leds:s0
 genfscon sysfs /class/backlight/11-0045/max_brightness  u:object_r:sysfs_leds:s0

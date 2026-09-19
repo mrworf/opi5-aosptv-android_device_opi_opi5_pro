@@ -1,0 +1,5 @@
+# Preserve the generic sysfs traversal semantics after giving /sys/dev/char a
+# dedicated label. Graphics clients resolve DRM render nodes through these
+# links, but only explicitly authorized domains may enumerate the directory.
+allow domain sysfs_char_devices:dir search;
+allow domain sysfs_char_devices:lnk_file { getattr read };
