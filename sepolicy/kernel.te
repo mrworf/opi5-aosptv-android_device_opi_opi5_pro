@@ -9,16 +9,3 @@ allow kernel device:chr_file { create setattr getattr unlink };
 type_transition kernel device:blk_file mtd_block_device "mtdblock0";
 allow kernel mtd_block_device:blk_file { create setattr };
 allow mtd_block_device device:filesystem associate;
-
-# Android creates the remaining loop devices after policy load for dynamic
-# partitions/APEX use. Label only those expected names at creation rather than
-# granting the kernel generic block-device creation rights.
-type_transition kernel device:blk_file loop_device "loop8";
-type_transition kernel device:blk_file loop_device "loop9";
-type_transition kernel device:blk_file loop_device "loop10";
-type_transition kernel device:blk_file loop_device "loop11";
-type_transition kernel device:blk_file loop_device "loop12";
-type_transition kernel device:blk_file loop_device "loop13";
-type_transition kernel device:blk_file loop_device "loop14";
-allow kernel loop_device:blk_file { create setattr };
-allow loop_device device:filesystem associate;
