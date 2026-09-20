@@ -142,7 +142,6 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/ramdisk/fstab.opi5:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.opi5 \
     $(DEVICE_PATH)/ramdisk/init.opi5.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.opi5.rc \
     $(DEVICE_PATH)/ramdisk/init.opi5.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.opi5.usb.rc \
-    $(DEVICE_PATH)/ramdisk/opi-dmesg-capture.sh:$(TARGET_COPY_OUT_VENDOR)/bin/opi-dmesg-capture.sh \
     $(DEVICE_PATH)/ramdisk/ueventd.opi5.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
 # Reboot recovery script

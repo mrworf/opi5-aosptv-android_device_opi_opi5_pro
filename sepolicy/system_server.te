@@ -1,2 +1,4 @@
 gpu_access(system_server)
 
+# Audio policy exchanges effect parameters with the audio HAL over FMQ memfds.
+allow system_server audioserver_tmpfs:file { read map write };

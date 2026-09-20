@@ -19,6 +19,19 @@ genfscon sysfs /devices/platform/fdc38100.video-codec      u:object_r:sysfs_vide
 genfscon sysfs /devices/platform/fdc70000.video-codec      u:object_r:sysfs_video_codec:s0
 genfscon sysfs /bus/media                                  u:object_r:sysfs_video_codec:s0
 
+# TvSettings checks this class to determine whether a Wi-Fi adapter exists.
+genfscon sysfs /class/ieee80211                            u:object_r:sysfs_wifi_phy:s0
+
+# The framework already has narrowly scoped access to these standard types;
+# label the RK3588 physical trees so it does not need generic sysfs access.
+genfscon sysfs /devices/platform/fd5d0000.syscon/fd5d0000.syscon:usb2phy@0/extcon       u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/fd5d8000.syscon/fd5d8000.syscon:usb2phy@8000/extcon    u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/fd5dc000.syscon/fd5dc000.syscon:usb2phy@c000/extcon    u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/fc800000.usb/usb2/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc840000.usb/usb5/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc880000.usb/usb6/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc8c0000.usb/usb4/wakeup  u:object_r:sysfs_wakeup:s0
+
 # Lights
 genfscon sysfs /class/backlight/11-0045/brightness      u:object_r:sysfs_leds:s0
 genfscon sysfs /class/backlight/11-0045/max_brightness  u:object_r:sysfs_leds:s0

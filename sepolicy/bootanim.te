@@ -1,1 +1,2 @@
 gpu_access(bootanim)
+perfetto_producer(bootanim)

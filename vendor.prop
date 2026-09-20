@@ -1,6 +1,5 @@
 # Audio
 persist.vendor.audio.device=hdmi0
-ro.boot.audio.tinyalsa.simulate_input=false
 ro.config.media_vol_default=20
 ro.config.media_vol_steps=50
 
@@ -34,7 +33,6 @@ bluetooth.profile.pan.panu.enabled?=true
 bluetooth.profile.pbap.server.enabled?=true
 bluetooth.profile.sap.server.enabled?=true
 bluetooth.profile.vcp.controller.enabled?=true
-persist.bluetooth.a2dp_aac.vbr_supported=true
 
 # Camera
 ro.hardware.camera=libcamera
@@ -61,7 +59,6 @@ vendor.hwc.drm.min_plane_size=4
 vendor.hwc.drm.preferred_mode=1920x1080@60
 
 # Lockscreen
-ro.lockscreen.disable.default=true
 
 # Media
 debug.stagefright.c2inputsurface=-1
@@ -70,7 +67,6 @@ debug.c2.use_dmabufheaps=1
 debug.stagefright.c2-poolmask=458752
 
 # MGLRU
-persist.device_config.mglru_native.lru_gen_config=core
 
 # Virtualization
 ro.boot.hypervisor.vm.supported=1

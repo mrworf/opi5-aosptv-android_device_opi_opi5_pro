@@ -45,6 +45,9 @@
 /dev/block/by-name/userdata u:object_r:userdata_block_device:s0
 /dev/block/by-name/boot     u:object_r:boot_block_device:s0
 
+# Late SPI-flash block device
+/dev/mtdblock[0-9]+         u:object_r:mtd_block_device:s0
+
 # Recovery boot
 /vendor/bin/recovery_boot_apply\.sh  u:object_r:recovery_boot_apply_exec:s0
 

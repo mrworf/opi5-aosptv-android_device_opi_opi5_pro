@@ -42,6 +42,11 @@ PRODUCT_CHARACTERISTICS := tv
 # board-name strings.
 OPI5_PRODUCT_DISPLAY_NAME := Orange Pi 5
 
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.bluetooth.a2dp_aac.vbr_supported=true \
+    persist.device_config.mglru_native.lru_gen_config=core \
+    ro.lockscreen.disable.default=true
+
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_PRODUCT_PROPERTIES += logd.logpersistd=logcatd
 endif

@@ -1,0 +1,2 @@
+# Audio server maps the audio HAL's generic-tmpfs FMQ buffers.
+allow audioserver tmpfs:file { read map write };

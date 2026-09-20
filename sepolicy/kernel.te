@@ -2,3 +2,9 @@ allow kernel self:capability mknod;
 allow kernel self:system module_request;
 allow kernel device:dir { create write add_name remove_name rmdir };
 allow kernel device:chr_file { create setattr getattr unlink };
+
+# The SPI flash MTD block device appears after SELinux is enforcing. Give the
+# devtmpfs kernel worker a name-specific transition instead of generic block
+# device creation rights.
+type_transition kernel device:blk_file mtd_block_device "mtdblock0";
+allow kernel mtd_block_device:blk_file { create setattr };

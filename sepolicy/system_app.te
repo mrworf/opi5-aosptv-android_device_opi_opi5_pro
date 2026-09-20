@@ -1,1 +1,8 @@
 gpu_access(system_app)
+
+# TvSettings enumerates PHYs to distinguish disabled Wi-Fi from no adapter.
+allow system_app sysfs_wifi_phy:dir r_dir_perms;
+allow system_app sysfs_wifi_phy:lnk_file r_file_perms;
+
+# NetworkInterface.getHardwareAddress() requests link metadata for the UI.
+allowxperm system_app self:netlink_route_socket nlmsg RTM_GETLINK;

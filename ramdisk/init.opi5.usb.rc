@@ -16,14 +16,3 @@ on boot
 on property:sys.usb.config=adb
     setprop sys.usb.config none
     setprop sys.usb.state none
-
-on post-fs-data && property:ro.debuggable=1
-    mkdir /data/misc/dmesgd 0700 root root
-    start opi-dmesg-capture
-
-service opi-dmesg-capture /vendor/bin/sh /vendor/bin/opi-dmesg-capture.sh
-    class core
-    user root
-    group root log
-    seclabel u:r:init:s0
-    disabled
