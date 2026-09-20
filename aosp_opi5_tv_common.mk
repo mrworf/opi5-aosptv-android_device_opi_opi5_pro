@@ -23,6 +23,10 @@ ifeq ($(wildcard $(OPI5_ADB_KEYS)),)
 $(error OPI5 ADB public key does not exist: $(OPI5_ADB_KEYS))
 endif
 PRODUCT_ADB_KEYS := $(OPI5_ADB_KEYS)
+ifeq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_COPY_FILES += \
+    $(OPI5_ADB_KEYS):$(TARGET_COPY_OUT_PRODUCT)/etc/security/adb_keys
+endif
 
 OPI5_RELEASE_CONFIG_MAP := build/release/opi5/release_config_map.textproto
 ifeq ($(wildcard $(OPI5_RELEASE_CONFIG_MAP)),)
