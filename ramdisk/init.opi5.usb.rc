@@ -1,7 +1,9 @@
-on boot && property:ro.debuggable=1
+on boot
     # This board uses every external USB connector in host mode.  Keep adbd on
-    # authenticated Ethernet/TCP only and do not create FunctionFS endpoints:
-    # their presence makes adbd continuously retry the unavailable gadget UDC.
+    # authenticated Ethernet/TCP in every build variant and do not create
+    # FunctionFS endpoints: their presence makes adbd continuously retry the
+    # unavailable gadget UDC.  User builds retain ro.adb.secure=1 and therefore
+    # accept only a host authorized by the packaged public key.
     setprop service.adb.tcp.port 5555
     setprop sys.usb.configfs 2
     setprop persist.sys.usb.config none
