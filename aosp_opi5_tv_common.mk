@@ -47,12 +47,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.device_config.mglru_native.lru_gen_config=core \
     ro.lockscreen.disable.default=true
 
-# Rockchip's legacy gralloc discovery still uses hw_get_module(), which probes
-# ro.arch before the architecture-specific HAL variants. Define the standard
-# build property so the probe does not fall through to default_prop under
-# enforcing SELinux.
-PRODUCT_SYSTEM_PROPERTIES += ro.arch=arm64
-
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_PRODUCT_PROPERTIES += logd.logpersistd=logcatd
 endif

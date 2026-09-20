@@ -1,0 +1,7 @@
+# Codec2's vendor service is packaged in an APEX but still reads the legacy
+# software-codec ION defaults from the system property namespace. Android's
+# platform policy grants the Codec2 HAL access to codec2_config_prop; label the
+# otherwise undeclared compatibility properties with that existing narrow type.
+ro.com.android.media.swcodec.ion.align       u:object_r:codec2_config_prop:s0 exact int
+ro.com.android.media.swcodec.ion.flags       u:object_r:codec2_config_prop:s0 exact int
+ro.com.android.media.swcodec.ion.heapmask    u:object_r:codec2_config_prop:s0 exact int

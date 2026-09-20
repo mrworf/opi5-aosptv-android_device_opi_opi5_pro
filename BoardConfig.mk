@@ -88,6 +88,7 @@ TARGET_NO_RECOVERY := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += device/opi/opi5_pro/sepolicy
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/opi/opi5_pro/sepolicy/system_ext/private
 ifneq ($(TARGET_BUILD_VARIANT),user)
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 endif
