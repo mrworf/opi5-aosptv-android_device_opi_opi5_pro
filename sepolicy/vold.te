@@ -1,0 +1,3 @@
+# Vold reads the NVMe SMART health log to report userdata storage lifetime.
+# Restrict access to the single admin command used by NvmeDeviceUtils.
+allowxperm vold userdata_block_device:blk_file ioctl NVME_IOCTL_ADMIN_CMD;

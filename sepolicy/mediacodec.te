@@ -1,5 +1,6 @@
 gpu_access(mediacodec)
 get_prop(mediacodec, vendor_ffmpeg_config_prop)
+get_prop(mediacodec, vendor_rga_config_prop)
 get_prop(mediacodec, vendor_v4l2_config_prop)
 
 # FFmpeg's V4L2-request backend discovers media devices through libudev's

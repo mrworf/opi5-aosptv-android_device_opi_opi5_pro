@@ -26,6 +26,11 @@ vendor.ffmpeg.loglevel              u:object_r:vendor_ffmpeg_config_prop:s0 exac
 vendor.ffmpeg.codec2.threads        u:object_r:vendor_ffmpeg_config_prop:s0 exact int
 vendor.ffmpeg.codec2.fast           u:object_r:vendor_ffmpeg_config_prop:s0 exact bool
 
+# RGA diagnostics read by librga consumers. The library must not publish its
+# version by mutating a process-global property at runtime.
+vendor.rga.log                      u:object_r:vendor_rga_config_prop:s0 exact int
+vendor.rga.log_level                u:object_r:vendor_rga_config_prop:s0 exact int
+
 #V4L2
 persist.vendor.v4l2_codec2.rank.decoder  u:object_r:vendor_v4l2_config_prop:s0
 persist.vendor.v4l2_codec2.rank.encoder  u:object_r:vendor_v4l2_config_prop:s0

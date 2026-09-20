@@ -1,5 +1,6 @@
 type mediadrm_vendor_data_file, file_type, data_file_type;
 type mtd_block_device, dev_type;
+type hal_power_default_tmpfs, file_type;
 type sysfs_hdmi, fs_type, sysfs_type;
 type sysfs_char_devices, fs_type, sysfs_type;
 type sysfs_video_codec, fs_type, sysfs_type;

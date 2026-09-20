@@ -2,3 +2,6 @@ gpu_access(system_server)
 
 # Audio policy exchanges effect parameters with the audio HAL over FMQ memfds.
 allow system_server audioserver_tmpfs:file { read map write };
+
+# Power manager exchanges mode and boost state with the Power HAL over FMQ.
+allow system_server hal_power_default_tmpfs:file { read write getattr map };
