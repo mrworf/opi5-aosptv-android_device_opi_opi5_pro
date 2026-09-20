@@ -1,0 +1,3 @@
+# Power HAL FMQ event flags are anonymous memfd objects carrying the generic
+# tmpfs label.  Permit only the mapping/read/write operations required by FMQ.
+allow hal_power_default tmpfs:file { read map write };

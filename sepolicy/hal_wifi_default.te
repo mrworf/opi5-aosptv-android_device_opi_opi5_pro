@@ -1,0 +1,4 @@
+# The reference Wi-Fi HAL always probes this optional debug property.  User
+# builds cannot set it, but allowing the HAL to read the unset value avoids a
+# denial without exposing a control surface.
+get_prop(hal_wifi_default, persist_vendor_debug_wifi_prop)

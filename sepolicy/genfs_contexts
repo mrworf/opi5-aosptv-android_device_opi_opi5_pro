@@ -27,10 +27,31 @@ genfscon sysfs /class/ieee80211                            u:object_r:sysfs_wifi
 genfscon sysfs /devices/platform/fd5d0000.syscon/fd5d0000.syscon:usb2phy@0/extcon       u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/fd5d8000.syscon/fd5d8000.syscon:usb2phy@8000/extcon    u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/fd5dc000.syscon/fd5dc000.syscon:usb2phy@c000/extcon    u:object_r:sysfs_extcon:s0
+# SystemSuspend follows /sys/class/wakeup links to these physical RK3588
+# nodes.  Label every actual wakeup directory; the former usb3/4/5 bus
+# numbers were stale and left the resolved targets as generic sysfs.
+genfscon sysfs /devices/platform/fc800000.usb/wakeup  u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/fc800000.usb/usb2/wakeup  u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/fc840000.usb/usb5/wakeup  u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/fc880000.usb/usb6/wakeup  u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/fc8c0000.usb/usb4/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc840000.usb/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc840000.usb/usb3/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc840000.usb/usb3/3-1/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc880000.usb/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc880000.usb/usb4/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc8c0000.usb/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc8c0000.usb/usb5/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc8c0000.usb/usb5/5-1/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fc000000.usb/xhci-hcd.4.auto/usb1/1-1/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fd5d8000.syscon/fd5d8000.syscon:usb2phy@8000/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fd5dc000.syscon/fd5dc000.syscon:usb2phy@c000/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdb60000.rga/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdb70000.rga/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/feb20000.spi/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/feb20000.spi/spi_master/spi2/spi2.0/rk805-pwrkey.3.auto/wakeup  u:object_r:sysfs_wakeup:s0
+
+# Both userdata and rootdisk queue symlinks resolve to the physical NVMe
+# queue.  This standard type gives init only the block-queue tuning access it
+# already has for /dev/sys/block/by-name/rootdisk.
+genfscon sysfs /devices/platform/a41000000.pcie/pci0004:40/0004:40:00.0/0004:41:00.0/nvme/nvme0/nvme0n1/queue/discard_max_bytes  u:object_r:sysfs_opi5_nvme_queue:s0
 
 # Lights
 genfscon sysfs /class/backlight/11-0045/brightness      u:object_r:sysfs_leds:s0

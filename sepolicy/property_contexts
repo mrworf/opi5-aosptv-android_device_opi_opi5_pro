@@ -4,6 +4,12 @@ persist.vendor.audio.hdmi.device    u:object_r:vendor_audio_config_prop:s0
 persist.vendor.audio.pcm.card.auto  u:object_r:vendor_audio_config_prop:s0
 persist.vendor.audio.pcm.card       u:object_r:vendor_audio_config_prop:s0
 persist.vendor.audio.pcm.device     u:object_r:vendor_audio_config_prop:s0
+ro.boot.audio.tinyalsa.simulate_input u:object_r:vendor_audio_config_prop:s0 exact bool
+ro.boot.audio.tinyalsa.ignore_output  u:object_r:vendor_audio_config_prop:s0 exact bool
+ro.hardware.audio.tinyalsa.host_latency_ms u:object_r:vendor_audio_config_prop:s0 exact int
+ro.hardware.audio.tinyalsa.period_count u:object_r:vendor_audio_config_prop:s0 exact int
+ro.hardware.audio.tinyalsa.period_size_multiplier u:object_r:vendor_audio_config_prop:s0 exact int
+ro.vendor.audio.usb.period_us       u:object_r:vendor_audio_config_prop:s0 exact int
 
 # CEC
 persist.vendor.hdmi.cec_device  u:object_r:vendor_hdmi_config_prop:s0
@@ -12,6 +18,13 @@ persist.vendor.hdmi.cec_device  u:object_r:vendor_hdmi_config_prop:s0
 persist.vendor.ffmpeg_codec2.rank.audio  u:object_r:vendor_ffmpeg_config_prop:s0
 persist.vendor.ffmpeg_codec2.rank.video  u:object_r:vendor_ffmpeg_config_prop:s0
 persist.vendor.ffmpeg_codec2.v4l2.h265   u:object_r:vendor_ffmpeg_config_prop:s0
+persist.vendor.ffmpeg_codec2.zero_copy_av1 u:object_r:vendor_ffmpeg_config_prop:s0 exact bool
+persist.vendor.ffmpeg_codec2.disable_av1 u:object_r:vendor_ffmpeg_config_prop:s0 exact bool
+vendor.ffmpeg.use_rga               u:object_r:vendor_ffmpeg_config_prop:s0 exact bool
+vendor.ffmpeg.rga_debug             u:object_r:vendor_ffmpeg_config_prop:s0 exact bool
+vendor.ffmpeg.loglevel              u:object_r:vendor_ffmpeg_config_prop:s0 exact string
+vendor.ffmpeg.codec2.threads        u:object_r:vendor_ffmpeg_config_prop:s0 exact int
+vendor.ffmpeg.codec2.fast           u:object_r:vendor_ffmpeg_config_prop:s0 exact bool
 
 #V4L2
 persist.vendor.v4l2_codec2.rank.decoder  u:object_r:vendor_v4l2_config_prop:s0

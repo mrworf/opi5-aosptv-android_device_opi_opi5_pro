@@ -8,3 +8,9 @@ allow kernel device:chr_file { create setattr getattr unlink };
 # device creation rights.
 type_transition kernel device:blk_file mtd_block_device "mtdblock0";
 allow kernel mtd_block_device:blk_file { create setattr };
+allow mtd_block_device device:filesystem associate;
+
+# Android creates loop8 after policy load for dynamic partitions/APEX use.
+# Label that name at creation rather than granting generic block-device access.
+type_transition kernel device:blk_file loop_device "loop8";
+allow kernel loop_device:blk_file { create setattr };

@@ -3,3 +3,7 @@
 # links, but only explicitly authorized domains may enumerate the directory.
 allow domain sysfs_char_devices:dir search;
 allow domain sysfs_char_devices:lnk_file { getattr read };
+
+# minigbm is loaded into app processes and reads this non-sensitive public
+# debug/config property while creating a driver instance.
+get_prop(appdomain, vendor_minigbm_config_prop)

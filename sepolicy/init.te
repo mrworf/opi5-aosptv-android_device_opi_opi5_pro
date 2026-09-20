@@ -1,2 +1,3 @@
 allow init kernel:system module_request;
 allow init tmpfs:lnk_file create;
+allow init sysfs_opi5_nvme_queue:file w_file_perms;

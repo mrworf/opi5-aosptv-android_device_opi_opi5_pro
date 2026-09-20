@@ -68,6 +68,12 @@ PRODUCT_VENDOR_PROPERTIES += \
     bluetooth.power.suspend.stop_le_scan.enabled=true \
     bluetooth.power.suspend.pause_advertisement.enabled=true
 
+# This framework setting belongs on the product partition.  Putting it in
+# vendor.prop makes vendor_init attempt to set an untyped system property,
+# which enforcing SELinux correctly rejects.
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.settings.large_screen_opt.enabled=true
+
 PRODUCT_COPY_FILES += \
     device/google/atv/products/bootanimations/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
 
