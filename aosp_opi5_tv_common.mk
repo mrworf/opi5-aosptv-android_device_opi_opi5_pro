@@ -53,7 +53,6 @@ $(call enforce-product-packages-exist,com.android.ranging vendor_tracing_descrip
 PRODUCT_PACKAGES += \
     DocumentsUI \
     LeanbackIME \
-    TvProvision \
     TvSampleLeanbackLauncher \
     TvSettingsTwoPanel
 
