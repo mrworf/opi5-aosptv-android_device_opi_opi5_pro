@@ -6,4 +6,4 @@ get_prop(hal_audio_default, a2dp_manual_sync_prop)
 # memfd:MessageQueue, but they retain the generic tmpfs label rather than a
 # domain-specific memfd_file label.  Updating the event word requires write
 # access; no path lookup, creation, execution, or general read access is needed.
-allow hal_audio_default tmpfs:file write;
+allow hal_audio_default tmpfs:file { map write };
