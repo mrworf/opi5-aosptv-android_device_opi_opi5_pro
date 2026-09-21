@@ -45,3 +45,9 @@ vendor.hwc.drm.preferred_mode u:object_r:vendor_hwc_config_prop:s0
 
 # minigbm
 vendor.minigbm.debug          u:object_r:vendor_minigbm_config_prop:s0 exact bool
+
+# Mesa queries its vendor.mesa.* debug and compatibility knobs while Android's
+# system-server renders the suspend color fade.  Give the namespace a public
+# vendor property type instead of letting absent knobs fall through to the
+# inaccessible vendor_default_prop catch-all.
+vendor.mesa.                  u:object_r:vendor_mesa_config_prop:s0

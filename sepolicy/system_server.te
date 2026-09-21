@@ -5,3 +5,5 @@ allow system_server audioserver_tmpfs:file { read map write };
 
 # Power manager exchanges mode and boost state with the Power HAL over FMQ.
 allow system_server hal_power_default_tmpfs:file { read write getattr map };
+
+get_prop(system_server, vendor_mesa_config_prop)
