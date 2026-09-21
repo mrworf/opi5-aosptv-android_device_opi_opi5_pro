@@ -64,6 +64,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_VENDOR_PROPERTIES += \
     bluetooth.device.class_of_device=34,4,36 \
     bluetooth.power.suspend.disconnect_acl.enabled=true \
+    bluetooth.power.suspend.retain_hid_acl.enabled=true \
     bluetooth.power.suspend.scan_mode_none.enabled=true \
     bluetooth.power.suspend.stop_le_scan.enabled=true \
     bluetooth.power.suspend.pause_advertisement.enabled=true
