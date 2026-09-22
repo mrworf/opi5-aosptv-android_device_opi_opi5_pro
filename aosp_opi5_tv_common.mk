@@ -47,8 +47,9 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.device_config.mglru_native.lru_gen_config=core \
     ro.lockscreen.disable.default=true
 
-# Keep Android's logd and kernel printk rings in RAM in every variant.
-# Persistent logcat capture remains available on demand in userdebug.
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PRODUCT_PROPERTIES += logd.logpersistd=logcatd
+endif
 
 PRODUCT_ENABLE_TV_IOWATCHDOG := false
 $(call inherit-product, device/google/atv/products/atv_base.mk)
