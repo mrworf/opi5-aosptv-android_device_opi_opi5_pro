@@ -61,7 +61,9 @@ BOARD_VENDOR_KERNEL_MODULES_LOAD := $(foreach module,$(OPI5_SOCKET_DIAG_MODULE_N
 
 # Manifest
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/framework_compatibility_matrix.xml
-DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MANIFEST_FILE := \
+    $(DEVICE_PATH)/manifest.xml \
+    $(DEVICE_PATH)/camera/android.hardware.camera.provider-V1-external-service.xml
 PRODUCT_MANIFEST_FILES := $(DEVICE_PATH)/product_manifest.xml
 
 

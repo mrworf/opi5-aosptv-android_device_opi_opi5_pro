@@ -42,6 +42,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
+# Camera
+# Android TV devices that expose USB host mode are required to support USB
+# cameras. The kernel already provides UVC and the board grants access to the
+# V4L2 nodes; package the AOSP external-camera provider and advertise only the
+# external-camera capability (there is no built-in camera on this board).
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider-V1-external-service
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml \
+    $(DEVICE_PATH)/camera/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
+
 # cec
 PRODUCT_PACKAGES += \
     com.android.hardware.tv.hdmi.connection.opi5
@@ -164,11 +176,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 PRODUCT_PACKAGES += \
     com.android.hardware.thermal
 
-# Touchscreen
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
-
 # USB
 PRODUCT_PACKAGES += \
     com.android.hardware.usb \
@@ -177,6 +184,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
+
+# Mesa exposes OpenGL ES 3.1 on the RK3588 Mali-G610. PackageManager derives
+# reqGlEsVersion from this property; without it the product incorrectly
+# advertises 0x0 despite having a working GLES implementation.
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.opengles.version=196609
 
 # Android Virtualization Framework is intentionally not enabled.  This RK3588
 # kernel does not provide the pKVM support required by AVF.

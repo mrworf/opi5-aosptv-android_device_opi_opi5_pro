@@ -77,7 +77,8 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.settings.large_screen_opt.enabled=true
 
 PRODUCT_COPY_FILES += \
-    device/google/atv/products/bootanimations/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
+    device/google/atv/products/bootanimations/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip \
+    device/opi/opi5_pro/permissions/opi5_tv_excluded_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/opi5_tv_excluded_hardware.xml
 
 PRODUCT_PACKAGES += \
     AndroidTvOpiFrameworkOverlay \

@@ -34,7 +34,8 @@ PRODUCT_COPY_FILES += \
     device/opi/opi5_pro/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
+    frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
 
 # Device identifier. This must come after all inclusions.
 PRODUCT_DEVICE := opi5_pro

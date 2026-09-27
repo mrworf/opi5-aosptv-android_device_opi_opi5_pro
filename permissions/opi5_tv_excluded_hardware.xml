@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+
+     Hardware features which must not be inferred from shared product or APEX
+     content on the Orange Pi 5 Android TV product.
+-->
+<permissions>
+    <!-- The TV is operated with D-pad/remote input and has no touch panel. -->
+    <unavailable-feature name="android.hardware.faketouch" />
+    <unavailable-feature name="android.hardware.touchscreen" />
+    <unavailable-feature name="android.hardware.touchscreen.multitouch" />
+    <unavailable-feature name="android.hardware.touchscreen.multitouch.distinct" />
+    <unavailable-feature name="android.hardware.touchscreen.multitouch.jazzhand" />
+
+    <!-- USB is host-only; gadget/accessory mode is intentionally unsupported. -->
+    <unavailable-feature name="android.hardware.usb.accessory" />
+</permissions>
