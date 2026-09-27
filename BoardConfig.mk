@@ -36,9 +36,8 @@ BOARD_KERNEL_CMDLINE := console=ttyS2,1500000 no_console_suspend root=/dev/ram0 
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += androidboot.audio.tinyalsa.simulate_input=false
 
-# Package every module enabled by the Orange Pi kernel configuration. Most hardware modules are
-# loaded on demand through modules.alias/modules.dep. Android-required INET diagnostics are built
-# into the kernel; keep any remaining modular diagnostic families available for early loading.
+# Package only modules recorded by the current kernel build. Old .ko files may
+# remain in an incremental output tree but must never enter vendor.img.
 ifeq ($(strip $(OPI5_KERNEL_BUILD_OUT)),)
 $(error OPI5_KERNEL_BUILD_OUT is required; build through the opi5_tv workspace)
 endif
@@ -48,7 +47,11 @@ endif
 ifneq ($(shell grep -c '^CONFIG_MODVERSIONS=y$$' $(OPI5_KERNEL_BUILD_OUT)/.config 2>/dev/null),1)
 $(error The staged kernel must enable CONFIG_MODVERSIONS)
 endif
-BOARD_VENDOR_KERNEL_MODULES := $(shell find $(OPI5_KERNEL_BUILD_OUT) -type f -name '*.ko' 2>/dev/null | sort)
+OPI5_KERNEL_MODULE_LIST := $(OPI5_KERNEL_BUILD_OUT)/opi5-modules.list
+ifeq ($(wildcard $(OPI5_KERNEL_MODULE_LIST)),)
+$(error Missing current kernel module list under $(OPI5_KERNEL_BUILD_OUT))
+endif
+BOARD_VENDOR_KERNEL_MODULES := $(shell cat $(OPI5_KERNEL_MODULE_LIST))
 ifeq ($(strip $(BOARD_VENDOR_KERNEL_MODULES)),)
 $(error No matching kernel modules found under $(OPI5_KERNEL_BUILD_OUT))
 endif
