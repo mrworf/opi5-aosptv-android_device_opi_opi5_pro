@@ -117,6 +117,13 @@
     -->
     <integer name="config_defaultNightMode">2</integer>
 
+    <!-- Flicky is the preinstalled F-Droid client. Trust it to hand APKs to Android's package
+         installer without requiring the user to enable "Install unknown apps" first. This does
+         not grant silent installation; Package Installer still confirms each install. -->
+    <string-array name="config_defaultRequestInstallPackagesAppOpPackages" translatable="false">
+        <item>app.flicky</item>
+    </string-array>
+
     <!-- CEC Configuration -->
     <bool name="config_cecTvSendStandbyOnSleepEnabled_default">false</bool>
     <bool name="config_cecTvSendStandbyOnSleepDisabled_default">true</bool>
