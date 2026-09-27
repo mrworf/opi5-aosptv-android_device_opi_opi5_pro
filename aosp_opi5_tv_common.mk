@@ -67,7 +67,8 @@ PRODUCT_VENDOR_PROPERTIES += \
     bluetooth.power.suspend.retain_hid_acl.enabled=true \
     bluetooth.power.suspend.scan_mode_none.enabled=true \
     bluetooth.power.suspend.stop_le_scan.enabled=true \
-    bluetooth.power.suspend.pause_advertisement.enabled=true
+    bluetooth.power.suspend.pause_advertisement.enabled=true \
+    bluetooth.power.suspend.restart_on_resume.enabled=true
 
 # This framework setting belongs on the product partition.  Putting it in
 # vendor.prop makes vendor_init attempt to set an untyped system property,
